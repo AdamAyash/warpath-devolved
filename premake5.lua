@@ -19,6 +19,9 @@ project "Engine"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "wccpch.h"
+    pchsource "Engine/src/wccpch.cpp"
+
      buildoptions
     {
         "/utf-8"
