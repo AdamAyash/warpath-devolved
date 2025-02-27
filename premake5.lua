@@ -11,6 +11,13 @@ workspace "WarcraftClone"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+
+include "Engine/vendor/GLFW"
+include "Engine/vendor/Glad"
+
 project "Engine"
     location "Engine"
     kind "SharedLib"
@@ -20,13 +27,12 @@ project "Engine"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "wccpch.h"
-    pchsource "Engine/src/wccpch.cpp"
+    pchsource "src/wccpch.cpp"
 
-     buildoptions
+    buildoptions
     {
         "/utf-8"
     }
-
 
     files
     {
@@ -36,7 +42,16 @@ project "Engine"
 
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}"
+    }
+
+    links
+    {
+        "GLFW",
+        "Glad",
+        "opengl32.lib"
     }
 
     filter "system:windows"
