@@ -27,7 +27,7 @@ project "Engine"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "wccpch.h"
-    pchsource "src/wccpch.cpp"
+    pchsource "Engine/src/wccpch.cpp"
 
     buildoptions
     {
