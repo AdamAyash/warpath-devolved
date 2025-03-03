@@ -22,9 +22,10 @@ project "Engine"
     location "Engine"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "wccpch.h"
     pchsource "Engine/src/wccpch.cpp"
@@ -56,7 +57,8 @@ project "Engine"
 
     filter "system:windows"
         cppdialect "c++20"
-        staticruntime "On"
+        staticruntime "off"
+        runtime "Debug"
         systemversion "latest"
 
         defines 
@@ -106,7 +108,9 @@ project "Sandbox"
     includedirs
     {
         "%{wks.location}/Engine/vendor/spdlog/include",
-        "Engine/src"
+        "Engine/src",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}"
     }
 
     links
@@ -138,4 +142,27 @@ project "Sandbox"
         defines "WCC_DISTRIBUTION"
         optimize "On"
     
-    
+project "UnitTests"
+    location "UnitTests"
+    kind "SharedLib"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "%{prj.name}/vendor/spdlog/include",
+        "Engine/src"
+    }
+
+    links
+    {
+        "Engine"
+    }

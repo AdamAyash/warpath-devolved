@@ -2,12 +2,12 @@
 #include "wccpch.h"
 #include "Logger.h"
 
-#define ENGINE_LOGGER_NAME			"Engine"
+#define ENGINE_LOGGER_NAME			"WCC Engine"
 #define APPLICATION_LOGGER_NAME		"Application"
 
 #define DEFAULT_LOGGER_PATTERN		"%^[%T] %n: %v%$"
 
-namespace Engine 
+namespace WCCEngine 
 {
 	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Logger::s_ClientLogger;

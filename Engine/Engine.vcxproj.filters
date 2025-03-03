@@ -9,19 +9,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\Application.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Assert.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Core\Core.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Logger.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\WCCEngine.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="src\Engine\Core\Utilities.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Window.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\wccpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Application.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\Core\Logger.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Window.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\wccpch.cpp" />

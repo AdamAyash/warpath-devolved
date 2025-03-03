@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Core.h"
+
+#pragma warning(push, 0)
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
+#pragma warning(pop)
 
-namespace Engine
+namespace WCCEngine
 {
 	class WCC_API Logger
 	{
@@ -12,12 +15,12 @@ namespace Engine
 
 		static void Init();
 
-		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() 
+		inline static const std::shared_ptr<spdlog::logger>& GetCoreLogger()
 		{
 			return s_CoreLogger;
 		}
 
-		inline static std::shared_ptr<spdlog::logger>& GetClientLogger()
+		inline static const std::shared_ptr<spdlog::logger>& GetClientLogger()
 		{
 			return s_ClientLogger;
 		}
@@ -28,16 +31,15 @@ namespace Engine
 	};
 }
 
-
 //Core log macros
-#define WCC_CORE_INFO(...)		::Engine::Logger::GetCoreLogger()->warn(__VA_ARGS__)
-#define WCC_CORE_WARN(...)		::Engine::Logger::GetCoreLogger()->warn(__VA_ARGS__)
-#define WCC_CORE_TRACE(...)		::Engine::Logger::GetCoreLogger()->trace(__VA_ARGS__)
-#define WCC_CORE_ERROR(...)		::Engine::Logger::GetCoreLogger()->error(__VA_ARGS__)
+#define WCC_CORE_INFO(...)		::WCCEngine::Logger::GetCoreLogger()->info(__VA_ARGS__)
+#define WCC_CORE_WARN(...)		::WCCEngine::Logger::GetCoreLogger()->warn(__VA_ARGS__)
+#define WCC_CORE_TRACE(...)		::WCCEngine::Logger::GetCoreLogger()->trace(__VA_ARGS__)
+#define WCC_CORE_ERROR(...)		::WCCEngine::Logger::GetCoreLogger()->error(__VA_ARGS__)
 
 //Client log macros
-#define WCC_CLIENT_INFO(...)	::Engine::Logger::GetClientLogger()->warn(__VA_ARGS__)
-#define WCC_CLIENT_WARN(...)	::Engine::Logger::GetClientLogger()->warn(__VA_ARGS__)
-#define WCC_CLIENT_TRACE(...)	::Engine::Logger::GetClientLogger()->trace(__VA_ARGS__)
-#define WCC_CLIENT_ERROR(...)	::Engine::Logger::GetClientLogger()->error(__VA_ARGS__)
+#define WCC_CLIENT_INFO(...)	::WCCEngine::Logger::GetClientLogger()->info(__VA_ARGS__)
+#define WCC_CLIENT_WARN(...)	::WCCEngine::Logger::GetClientLogger()->warn(__VA_ARGS__)
+#define WCC_CLIENT_TRACE(...)	::WCCEngine::Logger::GetClientLogger()->trace(__VA_ARGS__)
+#define WCC_CLIENT_ERROR(...)	::WCCEngine::Logger::GetClientLogger()->error(__VA_ARGS__)
 
