@@ -1,6 +1,8 @@
 
 #include "wccpch.h"
 #include "Logger.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/sinks/basic_file_sink.h>
 
 #define ENGINE_LOGGER_NAME			"WCC Engine"
 #define APPLICATION_LOGGER_NAME		"Application"

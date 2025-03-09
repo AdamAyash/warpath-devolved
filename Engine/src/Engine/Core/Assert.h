@@ -1,5 +1,4 @@
 #pragma once
-#include "Logger.h"
 
 #ifdef WCC_DEBUG
 #define WCC_ASSERT(expression) \

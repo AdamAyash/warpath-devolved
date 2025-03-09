@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /bin
 **/bin/
 /bin-int
+/Engine/vendor/Glad/bin-int/Debug-windows-x86_64/Glad
+/.vscode

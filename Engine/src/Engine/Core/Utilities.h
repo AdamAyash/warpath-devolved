@@ -1,12 +1,11 @@
 #pragma once
+#include "fstream"
+#include  "Core.h"
 
 namespace WCCEngine
 {
-	template<typename T>
-	using Scope = std::unique_ptr<T>;
-	template<typename T, typename ... Args>
-	constexpr Scope<T> CreateScope(Args&& ... args)
+	class Utilities
 	{
-		return std::make_unique<T>(std::forward<Args>(args)...);
-	}
+		Utilities() = delete;
+	};
 };

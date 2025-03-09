@@ -2,9 +2,10 @@
 
 #include "Core.h"
 
+// This ignores all warnings raised inside External headers
 #pragma warning(push, 0)
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 #pragma warning(pop)
 
 namespace WCCEngine
@@ -29,7 +30,7 @@ namespace WCCEngine
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
 	};
-}
+};
 
 //Core log macros
 #define WCC_CORE_INFO(...)		::WCCEngine::Logger::GetCoreLogger()->info(__VA_ARGS__)
