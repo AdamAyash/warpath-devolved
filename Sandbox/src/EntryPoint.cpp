@@ -5,6 +5,4 @@ int main()
 {
 	Sandbox* application = new Sandbox();
 	application->Run();
-
-	delete application;
 }

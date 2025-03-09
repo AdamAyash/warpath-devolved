@@ -7,4 +7,7 @@ class Sandbox : public WCCEngine::Application
 public:
 	Sandbox();
 	~Sandbox();
+
+public:
+	virtual void Initialize() override;
 };

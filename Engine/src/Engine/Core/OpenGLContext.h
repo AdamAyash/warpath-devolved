@@ -13,5 +13,8 @@ namespace WCCEngine
 		const bool InitializeOpenGLContext();
 		const bool InitializeGlad();
 		void DisplayOpenGLContextInfo();
+
+	private:
+		const bool CheckIfClientSupportsOpenGLVersion4() const;
 	};
 };
