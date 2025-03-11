@@ -12,14 +12,14 @@ workspace "WarcraftClone"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
-IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
-IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+IncludeDir["GLFW"] = "WCCEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "WCCEngine/vendor/Glad/include"
 
-include "Engine/vendor/GLFW"
-include "Engine/vendor/Glad"
+include "WCCEngine/vendor/GLFW"
+include "WCCEngine/vendor/Glad"
 
-project "Engine"
-    location "Engine"
+project "WCCEngine"
+    location "WCCEngine"
     kind "SharedLib"
     language "C++"
     staticruntime "off"
@@ -28,7 +28,7 @@ project "Engine"
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "wccpch.h"
-    pchsource "Engine/src/wccpch.cpp"
+    pchsource "WCCEngine/src/wccpch.cpp"
 
     buildoptions
     {
@@ -107,15 +107,15 @@ project "Sandbox"
 
     includedirs
     {
-        "%{wks.location}/Engine/vendor/spdlog/include",
-        "Engine/src",
+        "%{wks.location}/WCCEngine/vendor/spdlog/include",
+        "WCCEngine/src",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}"
     }
 
     links
     {
-        "Engine"
+        "WCCEngine"
     }
 
     filter "system:windows"
@@ -159,10 +159,10 @@ project "UnitTests"
     includedirs
     {
         "%{prj.name}/vendor/spdlog/include",
-        "Engine/src"
+        "WCCEngine/src"
     }
 
     links
     {
-        "Engine"
+        "WCCEngine"
     }
