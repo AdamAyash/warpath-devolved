@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{130D9B61-7FC2-1357-08B7-0D2E746B0A5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\FileSystem">
+      <UniqueIdentifier>{0F2B98E7-7B41-967D-C4B8-219F300E6705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer">
+      <UniqueIdentifier>{E1119970-4D9D-0635-56AE-8929C2B86235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer\Shader">
+      <UniqueIdentifier>{673A969A-5334-BFEC-3CA1-55FD283A2559}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Engine\Core\Application.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Assert.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Core.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Logger.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\OpenGLContext.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Window.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\FileSystem\FileSystem.h">
+      <Filter>Engine\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Renderer\Shader\Shader.h">
+      <Filter>Engine\Renderer\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wccpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Application.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Logger.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\OpenGLContext.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Utilities.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Window.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\FileSystem\FIleSystem.cpp">
+      <Filter>Engine\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Renderer\Shader\Shader.cpp">
+      <Filter>Engine\Renderer\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wccpch.cpp" />
+  </ItemGroup>
+</Project>

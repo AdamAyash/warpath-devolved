@@ -1,9 +1,16 @@
-#pragma once
+#include "Sandbox.h"
+#include <Engine/Renderer/Shader/Shader.h>
 
-#include "Engine/Core/Logger.h"
 
-int main()
+Sandbox::Sandbox()
 {
-	Engine::Logger::Init();
-	WCC_CLIENT_INFO("Hello world");
+}
+
+Sandbox::~Sandbox()
+{
+}
+
+void Sandbox::Initialize()
+{
+	__super::Initialize();
 }

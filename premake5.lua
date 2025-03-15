@@ -12,22 +12,23 @@ workspace "WarcraftClone"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
-IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
-IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+IncludeDir["GLFW"] = "WCCEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "WCCEngine/vendor/Glad/include"
 
-include "Engine/vendor/GLFW"
-include "Engine/vendor/Glad"
+include "WCCEngine/vendor/GLFW"
+include "WCCEngine/vendor/Glad"
 
-project "Engine"
-    location "Engine"
+project "WCCEngine"
+    location "WCCEngine"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "wccpch.h"
-    pchsource "Engine/src/wccpch.cpp"
+    pchsource "WCCEngine/src/wccpch.cpp"
 
     buildoptions
     {
@@ -56,7 +57,8 @@ project "Engine"
 
     filter "system:windows"
         cppdialect "c++20"
-        staticruntime "On"
+        staticruntime "off"
+        runtime "Debug"
         systemversion "latest"
 
         defines 
@@ -105,13 +107,15 @@ project "Sandbox"
 
     includedirs
     {
-        "%{wks.location}/Engine/vendor/spdlog/include",
-        "Engine/src"
+        "%{wks.location}/WCCEngine/vendor/spdlog/include",
+        "WCCEngine/src",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}"
     }
 
     links
     {
-        "Engine"
+        "WCCEngine"
     }
 
     filter "system:windows"
@@ -138,4 +142,27 @@ project "Sandbox"
         defines "WCC_DISTRIBUTION"
         optimize "On"
     
-    
+project "UnitTests"
+    location "UnitTests"
+    kind "SharedLib"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "%{prj.name}/vendor/spdlog/include",
+        "WCCEngine/src"
+    }
+
+    links
+    {
+        "WCCEngine"
+    }
