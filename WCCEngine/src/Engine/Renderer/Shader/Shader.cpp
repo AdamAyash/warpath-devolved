@@ -1,6 +1,7 @@
 #include "wccpch.h"
 #include "Shader.h"
 #include "../../FileSystem/FileSystem.h"
+#include "../../Core/Timer.h"
 
 #define SHADER_COMPILATION_INFO_BUFFER_SIZE 512
 
@@ -8,10 +9,13 @@ namespace WCCEngine
 {
 	Shader::Shader(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)
 	{
+		Timer oTimer;
 		if (!Create(strVertexShaderSourceFilePath, strFragmentShaderSourceFilePath))
 		{
 			WCC_CORE_ERROR("Shader creation failed.");
 		}
+
+		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
 	}
 
 	void Shader::Bind()
