@@ -16,9 +16,11 @@
 #define IN
 //Describes an output function parameter
 #define OUT
+//Describes an optional function parameter
+#define OPTIONAL
 
 #ifdef WCC_WINDOWS_PLATFORM 
-	#define WCCSecureZeroMemory(x) SecureZeroMemory(x, sizeof(x))
+	#define WCCSecureZeroMemory SecureZeroMemory(this, sizeof(this))
 #endif
 
 #include "Logger.h"

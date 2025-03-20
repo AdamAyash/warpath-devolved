@@ -15,7 +15,7 @@ namespace WCCEngine
 			, int nWidth = DEFAULT_WINDOW_WIDTH, int nHeight = DEFAULT_WINDOW_HEIGHT)
 			: m_strTitle(strTitle), m_nWidth(nWidth), m_nHeight(nHeight)
 		{
-		} 
+		}
 
 		~WindowProperties()
 		{
@@ -26,7 +26,7 @@ namespace WCCEngine
 		std::string m_strTitle;
 	};
 
-	class WCC_API Window
+	class WCC_API Window final
 	{
 	public:
 		Window(IN const WindowProperties& oWindowProperties);

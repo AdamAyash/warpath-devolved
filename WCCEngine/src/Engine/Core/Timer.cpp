@@ -2,8 +2,8 @@
 #include "wccpch.h"
 #include "Timer.h"
 
-#define ONE_HUNDRER_OF_A_SECOND 100.0f
-
+#define ONE_THOUSAND_OF_A_SECOND 1000.0f
+ 
 namespace WCCEngine
 {
 	Timer::Timer()
@@ -28,6 +28,6 @@ namespace WCCEngine
 
 	float Timer::ElapsedMilliseconds()
 	{
-		return Elapsed() / ONE_HUNDRER_OF_A_SECOND;
+		return Elapsed() / ONE_THOUSAND_OF_A_SECOND;
 	}
 }

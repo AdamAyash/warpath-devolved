@@ -20,7 +20,7 @@ namespace WCCEngine
 		while (m_bIsRunning)
 		{
 			Update();
-			Render();
+			Render(m_pRenderer);
 		}
 	}
 
@@ -35,6 +35,7 @@ namespace WCCEngine
 
 		WindowProperties oWindowProperties;
 		m_pWindow = CreateScope<Window>(oWindowProperties);
+		m_pRenderer = CreateRef<Renderer2D>();
 	}
 
 	void Application::Update()
@@ -46,11 +47,8 @@ namespace WCCEngine
 	{
 	}
 
-	void Application::Render()
+	void Application::Render(Ref<Renderer2D> pRenderer)
 	{
-		//TODO this will be moved in the renderer class
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 	}
 }
 

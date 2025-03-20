@@ -1,8 +1,9 @@
 #pragma once
 
 #include <Engine/Core/Application.h>
+#include <Engine/Renderer/Renderer2D.h>
 
-class Sandbox : public WCCEngine::Application
+class Sandbox final : public WCCEngine::Application
 {
 public:
 	Sandbox();
@@ -10,4 +11,5 @@ public:
 
 public:
 	virtual void Initialize() override;
+	virtual void Render(WCCEngine::Ref<WCCEngine::Renderer2D> pRenderer) override;
 };
