@@ -44,6 +44,7 @@ project "WCCEngine"
     includedirs
     {
         "%{prj.name}/vendor/spdlog/include",
+        "%{prj.name}/vendor/spdlog/stb_image",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}"
     }

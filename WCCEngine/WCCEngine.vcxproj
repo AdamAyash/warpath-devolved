@@ -165,6 +165,9 @@
     <ClInclude Include="src\Engine\Core\Timer.h" />
     <ClInclude Include="src\Engine\Core\Utilities.h" />
     <ClInclude Include="src\Engine\Core\Window.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventSystem.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventType.h" />
     <ClInclude Include="src\Engine\FileSystem\FileSystem.h" />
     <ClInclude Include="src\Engine\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Engine\Renderer\Shader\Shader.h" />
@@ -177,6 +180,8 @@
     <ClCompile Include="src\Engine\Core\Timer.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities.cpp" />
     <ClCompile Include="src\Engine\Core\Window.cpp" />
+    <ClCompile Include="src\Engine\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.cpp" />
     <ClCompile Include="src\Engine\FileSystem\FIleSystem.cpp" />
     <ClCompile Include="src\Engine\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Engine\Renderer\Shader\Shader.cpp" />

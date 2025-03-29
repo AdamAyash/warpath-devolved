@@ -52,6 +52,9 @@
       <Filter>Engine\Renderer\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\wccpch.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventSystem.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.h" />
+    <ClInclude Include="src\Engine\EventSystem\EventType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -82,5 +85,7 @@
       <Filter>Engine\Renderer\Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\wccpch.cpp" />
+    <ClCompile Include="src\Engine\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.cpp" />
   </ItemGroup>
 </Project>
