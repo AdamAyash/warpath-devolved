@@ -18,14 +18,14 @@ namespace WCCEngine
 		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
 	}
 
-	void Shader::Bind()
+	void Shader::Bind() const
 	{
-		glUseProgram(m_nShaderProgramID);
+		glUseProgram(m_nObjectID);
 	}
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_nShaderProgramID);
+		glDeleteProgram(m_nObjectID);
 	}
 
 	const bool Shader::Create(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)
@@ -70,20 +70,20 @@ namespace WCCEngine
 		glGetShaderiv(nFragmentShaderProgram, GL_COMPILE_STATUS, &bIsSuccessful);
 		if (!bIsSuccessful)
 		{
-			glGetShaderInfoLog(nFragmentShaderProgram, 512, NULL, shaderCompilationInfoBuffer);
+			glGetShaderInfoLog(nFragmentShaderProgram, SHADER_COMPILATION_INFO_BUFFER_SIZE, NULL, shaderCompilationInfoBuffer);
 			WCC_CORE_ERROR(shaderCompilationInfoBuffer);
 			return false;
 		}
 
-		m_nShaderProgramID = glCreateProgram();
-		glAttachShader(m_nShaderProgramID, nVertexShaderProgram);
-		glAttachShader(m_nShaderProgramID, nFragmentShaderProgram);
-		glLinkProgram(m_nShaderProgramID);
+		m_nObjectID = glCreateProgram();
+		glAttachShader(m_nObjectID, nVertexShaderProgram);
+		glAttachShader(m_nObjectID, nFragmentShaderProgram);
+		glLinkProgram(m_nObjectID);
 
-		glGetProgramiv(m_nShaderProgramID, GL_LINK_STATUS, &bIsSuccessful);
+		glGetProgramiv(m_nObjectID, GL_LINK_STATUS, &bIsSuccessful);
 		if (!bIsSuccessful)
 		{
-			glGetProgramInfoLog(m_nShaderProgramID, 512, NULL, shaderCompilationInfoBuffer);
+			glGetProgramInfoLog(m_nObjectID, SHADER_COMPILATION_INFO_BUFFER_SIZE, NULL, shaderCompilationInfoBuffer);
 			WCC_CORE_ERROR(shaderCompilationInfoBuffer);
 			return false;
 		}

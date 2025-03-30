@@ -23,7 +23,7 @@
 	#define WCCSecureZeroMemory SecureZeroMemory(this, sizeof(this))
 #endif
 
-#include "Logger.h"
+#include "Logger/Logger.h"
 #include "Assert.h"
 
 namespace WCCEngine 
