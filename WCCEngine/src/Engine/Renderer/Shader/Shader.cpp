@@ -18,6 +18,10 @@ namespace WCCEngine
 		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
 	}
 
+	void Shader::Generate()
+	{
+	}
+
 	void Shader::Bind() const
 	{
 		glUseProgram(m_nObjectID);

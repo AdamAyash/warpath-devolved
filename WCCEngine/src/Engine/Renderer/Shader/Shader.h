@@ -14,6 +14,7 @@ namespace WCCEngine
 		~Shader();
 
 	public:
+		virtual void Generate() override;
 		virtual void Bind() const override;
 
 	private:

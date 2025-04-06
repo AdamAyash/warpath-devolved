@@ -1,7 +1,7 @@
 #include "wccpch.h"
 #include "Window.h"
 #include <iostream>
-#include "OpenGLContext.h"
+#include "OpenGL/OpenGLContext.h"
 #include "../EventSystem/EventImplementations/WindowCloseEvent.h"
 
 namespace WCCEngine
