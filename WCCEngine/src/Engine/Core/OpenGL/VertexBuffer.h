@@ -1,7 +1,6 @@
 #pragma once
 #include "OpenGLObject.h"
 #include "../Core.h"
-#include "glad/glad.h"
 
 namespace WCCEngine
 {

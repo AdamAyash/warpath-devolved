@@ -7,6 +7,18 @@
     <Filter Include="Engine\Core">
       <UniqueIdentifier>{130D9B61-7FC2-1357-08B7-0D2E746B0A5B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Core\Logger">
+      <UniqueIdentifier>{824F39E1-6E33-FA36-D793-F489C396E4B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\OpenGL">
+      <UniqueIdentifier>{E7E249E8-D3C6-0A3E-3C27-0591282AF5BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\EventSystem">
+      <UniqueIdentifier>{11AEBD3C-FD91-7E92-66F2-78E552F56814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\EventSystem\EventImplementations">
+      <UniqueIdentifier>{1B00964F-878F-573A-908B-3852FC999246}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Engine\FileSystem">
       <UniqueIdentifier>{0F2B98E7-7B41-967D-C4B8-219F300E6705}</UniqueIdentifier>
     </Filter>
@@ -27,11 +39,17 @@
     <ClInclude Include="src\Engine\Core\Core.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Logger.h">
-      <Filter>Engine\Core</Filter>
+    <ClInclude Include="src\Engine\Core\Logger\Logger.h">
+      <Filter>Engine\Core\Logger</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\OpenGLContext.h">
-      <Filter>Engine\Core</Filter>
+    <ClInclude Include="src\Engine\Core\OpenGL\OpenGLContext.h">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\OpenGL\OpenGLObject.h">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\OpenGL\VertexBuffer.h">
+      <Filter>Engine\Core\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Timer.h">
       <Filter>Engine\Core</Filter>
@@ -42,6 +60,15 @@
     <ClInclude Include="src\Engine\Core\Window.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.h">
+      <Filter>Engine\EventSystem\EventImplementations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\EventSystem\EventSystem.h">
+      <Filter>Engine\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\EventSystem\EventType.h">
+      <Filter>Engine\EventSystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\FileSystem\FileSystem.h">
       <Filter>Engine\FileSystem</Filter>
     </ClInclude>
@@ -51,20 +78,27 @@
     <ClInclude Include="src\Engine\Renderer\Shader\Shader.h">
       <Filter>Engine\Renderer\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Renderer\Texture2D.h">
+      <Filter>Engine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\wccpch.h" />
-    <ClInclude Include="src\Engine\EventSystem\EventSystem.h" />
-    <ClInclude Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.h" />
-    <ClInclude Include="src\Engine\EventSystem\EventType.h" />
+    <ClInclude Include="src\Engine\ResourceManager\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Logger.cpp">
-      <Filter>Engine\Core</Filter>
+    <ClCompile Include="src\Engine\Core\Logger\Logger.cpp">
+      <Filter>Engine\Core\Logger</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\OpenGLContext.cpp">
-      <Filter>Engine\Core</Filter>
+    <ClCompile Include="src\Engine\Core\OpenGL\OpenGLContext.cpp">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\OpenGL\OpenGLObject.cpp">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\OpenGL\VertexBuffer.cpp">
+      <Filter>Engine\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Timer.cpp">
       <Filter>Engine\Core</Filter>
@@ -75,6 +109,12 @@
     <ClCompile Include="src\Engine\Core\Window.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.cpp">
+      <Filter>Engine\EventSystem\EventImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\EventSystem\EventSystem.cpp">
+      <Filter>Engine\EventSystem</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\FileSystem\FIleSystem.cpp">
       <Filter>Engine\FileSystem</Filter>
     </ClCompile>
@@ -84,8 +124,10 @@
     <ClCompile Include="src\Engine\Renderer\Shader\Shader.cpp">
       <Filter>Engine\Renderer\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Renderer\Texture2D.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\wccpch.cpp" />
-    <ClCompile Include="src\Engine\EventSystem\EventSystem.cpp" />
-    <ClCompile Include="src\Engine\EventSystem\EventImplementations\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\Engine\ResourceManager\ResourceManager.cpp" />
   </ItemGroup>
 </Project>

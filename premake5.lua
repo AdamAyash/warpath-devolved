@@ -14,6 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "WCCEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "WCCEngine/vendor/Glad/include"
+IncludeDir["GLM"] = "WCCEngine/vendor/GLM/glm"
 
 include "WCCEngine/vendor/GLFW"
 include "WCCEngine/vendor/Glad"
@@ -44,16 +45,19 @@ project "WCCEngine"
     includedirs
     {
         "%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/vendor/spdlog/stb_image",
+        "%{prj.name}/vendor/stb_image",
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Glad}"
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.GLM}",
+        "vendor/GLM/glm/**.hpp",
+		"vendor/GLM/glm/**.inl",
     }
 
     links
     {
         "GLFW",
         "Glad",
-        "opengl32.lib"
+        "opengl32.lib",
     }
 
     filter "system:windows"

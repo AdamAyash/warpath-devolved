@@ -1,6 +1,5 @@
 #include "wccpch.h"
 #include "VertexBuffer.h"
-#include "glad/glad.h"
 
 namespace WCCEngine
 {

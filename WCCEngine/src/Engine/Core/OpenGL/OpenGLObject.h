@@ -1,5 +1,6 @@
 #pragma once
 #include "../Core.h"
+#include <glad/glad.h>
 
 #define INVALID_OBJECT_ID -1
 

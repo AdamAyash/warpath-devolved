@@ -1,9 +1,8 @@
 #pragma once
 #include "string"
-#include <glad/glad.h>
+#include "../../Core/OpenGL/OpenGLObject.h"
 #include "GLFW/glfw3.h"
 #include "../../Core/Core.h"
-#include "../../Core/OpenGL/OpenGLObject.h"
 
 namespace WCCEngine
 {
