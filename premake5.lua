@@ -115,7 +115,10 @@ project "Sandbox"
         "%{wks.location}/WCCEngine/vendor/spdlog/include",
         "WCCEngine/src",
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Glad}"
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.GLM}",
+        "vendor/GLM/glm/**.hpp",
+		"vendor/GLM/glm/**.inl",
     }
 
     links
