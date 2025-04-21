@@ -14,6 +14,7 @@ namespace WCCEngine
 		, m_bNormalized(bNormalized)
 		, m_pCurrentStideOffset(pCurrentStideOffset)
 	{
+		Generate();
 	}
 
 	VertexBuffer::VertexBufferLayout::~VertexBufferLayout()
@@ -39,6 +40,7 @@ namespace WCCEngine
 
 	VertexBuffer::~VertexBuffer()
 	{
+		m_oVertexBufferLayoutArray.clear();
 	}
 
 	void VertexBuffer::Bind() const
@@ -54,8 +56,6 @@ namespace WCCEngine
 	void VertexBuffer::AddLayout(std::size_t nnStrideSize, int nComponentSize /*= FOUR_COMPONENT_SIZE*/, GLenum eComponentType /*= GL_FLOAT*/, GLboolean bNormalized /*= GL_FALSE*/, const void* pCurrentStideOffset /*= (void*)0*/)
 	{
 		const auto oBufferLayout = CreateRef<VertexBufferLayout>(m_nBufferLayoutCounter++, nnStrideSize, nComponentSize, eComponentType, bNormalized, pCurrentStideOffset);
-		oBufferLayout->Generate();
-
 		m_oVertexBufferLayoutArray.push_back(oBufferLayout);
 	}
 }

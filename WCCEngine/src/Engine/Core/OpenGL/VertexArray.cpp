@@ -12,6 +12,7 @@ namespace WCCEngine
 	VertexArray::~VertexArray()
 	{
 		glDeleteVertexArrays(1, &m_nObjectID);
+		m_oVertexBufferArray.clear();
 	}
 
 	void VertexArray::Generate()
