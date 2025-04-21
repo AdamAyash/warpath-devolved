@@ -20,12 +20,6 @@ namespace WCCEngine
 		glGenTextures(1, &this->m_nObjectID);
 		Bind();
 
-		if (!m_pTextureData)
-		{
-			WCC_CORE_ERROR("Texture data is not loaded.");
-			return;
-		}
-
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_nWidth, m_nHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pTextureData);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
