@@ -31,7 +31,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\ExampleVertexShader.glsl" />
-    <None Include="assets\shaders\ExampleFragmentShader.glsl" />
+    <Image Include="..\..\..\Users\aayas\OneDrive\Documents\Projects\Breakout\Breakout\Textures\awesomeface.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

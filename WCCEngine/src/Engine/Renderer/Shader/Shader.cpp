@@ -2,6 +2,9 @@
 #include "Shader.h"
 #include "../../FileSystem/FileSystem.h"
 #include "../../Core/Timer.h"
+#include "glm.hpp"
+#include <gtc/type_ptr.hpp>
+
 
 #define SHADER_COMPILATION_INFO_BUFFER_SIZE 512
 
@@ -18,6 +21,11 @@ namespace WCCEngine
 		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
 	}
 
+	Shader::~Shader()
+	{
+		glDeleteProgram(m_nObjectID);
+	}
+
 	void Shader::Generate()
 	{
 	}
@@ -27,9 +35,27 @@ namespace WCCEngine
 		glUseProgram(m_nObjectID);
 	}
 
-	Shader::~Shader()
+	void Shader::SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind /*= false*/)
 	{
-		glDeleteProgram(m_nObjectID);
+		if (bBind)
+			Bind();
+
+		glUniformMatrix4fv(glGetUniformLocation(m_nObjectID, strName.c_str()), 1, false, glm::value_ptr(oMatrix));
+	}
+
+	void Shader::SetVector3(IN const std::string& strName, IN const glm::vec3& oVector3, OPTIONAL bool bBind /*= false*/)
+	{
+		if (bBind)
+			Bind();
+
+		glUniform3f(glGetUniformLocation(this->m_nObjectID, strName.c_str()), oVector3.x, oVector3.y, oVector3.z);
+	}
+
+	void Shader::SetInteger(IN const std::string& strName, IN const int nInteger, OPTIONAL bool bBind /*= false*/)
+	{
+		if (bBind)
+			Bind();
+		glUniform1i(glGetUniformLocation(this->m_nObjectID, strName.c_str()), nInteger);
 	}
 
 	const bool Shader::Create(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)

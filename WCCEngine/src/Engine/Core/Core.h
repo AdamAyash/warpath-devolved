@@ -18,6 +18,11 @@
 #define OUT
 //Describes an optional function parameter
 #define OPTIONAL
+//Describes a reference to the base class
+#define BASE __super
+
+//Describes a  nested class
+#define NESTED_CLASS
 
 #ifdef WCC_WINDOWS_PLATFORM 
 	#define WCCSecureZeroMemory SecureZeroMemory(this, sizeof(this))

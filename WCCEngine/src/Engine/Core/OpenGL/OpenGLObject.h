@@ -13,7 +13,8 @@ namespace WCCEngine
 		virtual ~OpenGLObject();
 
 	public:
-		constexpr inline unsigned int GetObjectID() const;
+		WCC_API constexpr inline unsigned int GetObjectID() const;
+
 		virtual void Generate() PURE;
 		virtual void Bind() const PURE;
 

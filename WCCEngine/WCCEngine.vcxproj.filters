@@ -28,6 +28,9 @@
     <Filter Include="Engine\Renderer\Shader">
       <UniqueIdentifier>{673A969A-5334-BFEC-3CA1-55FD283A2559}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ResourceManager">
+      <UniqueIdentifier>{ED06C9D5-D900-F227-C26D-8838AE065894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Application.h">
@@ -46,6 +49,9 @@
       <Filter>Engine\Core\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\OpenGL\OpenGLObject.h">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\OpenGL\VertexArray.h">
       <Filter>Engine\Core\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\OpenGL\VertexBuffer.h">
@@ -81,8 +87,10 @@
     <ClInclude Include="src\Engine\Renderer\Texture2D.h">
       <Filter>Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\ResourceManager\ResourceManager.h">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClInclude>
     <ClInclude Include="src\wccpch.h" />
-    <ClInclude Include="src\Engine\ResourceManager\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -95,6 +103,9 @@
       <Filter>Engine\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\OpenGL\OpenGLObject.cpp">
+      <Filter>Engine\Core\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\OpenGL\VertexArray.cpp">
       <Filter>Engine\Core\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\OpenGL\VertexBuffer.cpp">
@@ -115,7 +126,7 @@
     <ClCompile Include="src\Engine\EventSystem\EventSystem.cpp">
       <Filter>Engine\EventSystem</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\FileSystem\FIleSystem.cpp">
+    <ClCompile Include="src\Engine\FileSystem\FileSystem.cpp">
       <Filter>Engine\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\Renderer2D.cpp">
@@ -127,7 +138,9 @@
     <ClCompile Include="src\Engine\Renderer\Texture2D.cpp">
       <Filter>Engine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\ResourceManager\ResourceManager.cpp">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClCompile>
     <ClCompile Include="src\wccpch.cpp" />
-    <ClCompile Include="src\Engine\ResourceManager\ResourceManager.cpp" />
   </ItemGroup>
 </Project>
