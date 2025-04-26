@@ -20,7 +20,7 @@ namespace WCCEngine
 		while (m_bIsRunning)
 		{
 			Update();
-			Render();
+			Render(m_pRenderer);
 		}
 	}
 
@@ -35,6 +35,9 @@ namespace WCCEngine
 
 		WindowProperties oWindowProperties;
 		m_pWindow = CreateScope<Window>(oWindowProperties);
+		m_pRenderer = CreateRef<Renderer2D>();
+
+		m_pWindow->SetEventListener(*this);
 	}
 
 	void Application::Update()
@@ -44,13 +47,24 @@ namespace WCCEngine
 
 	void Application::Load()
 	{
+
 	}
 
-	void Application::Render()
+	bool Application::OnWindowClose(const WindowCloseEvent& oEvent)
 	{
-		//TODO this will be moved in the renderer class
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		ShutDown();
+		return true;
+	}
+
+	void Application::OnEvent(IN BaseEvent& oEvent)
+	{
+
+		EventDispatcher oEventDispatcher(oEvent);
+		oEventDispatcher.Dispatch<WindowCloseEvent>(WCC_BIND_EVENT(Application::OnWindowClose));
+	}
+
+	void Application::Render(Ref<Renderer2D> pRenderer)
+	{
 	}
 }
 

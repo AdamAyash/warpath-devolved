@@ -366,3 +366,7 @@ FodyWeavers.xsd
 /bin-int
 /Engine/vendor/Glad/bin-int/Debug-windows-x86_64/Glad
 /.vscode
+/WCCEngine/vendor/Glad/bin-int/Debug-windows-x86_64/Glad
+/WCCEngine/vendor/Glad
+*..vcxproj.filters
+*.vcxproj

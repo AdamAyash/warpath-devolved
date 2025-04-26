@@ -1,6 +1,10 @@
 #include "wccpch.h"
 #include "Shader.h"
 #include "../../FileSystem/FileSystem.h"
+#include "../../Core/Timer.h"
+#include "glm.hpp"
+#include <gtc/type_ptr.hpp>
+
 
 #define SHADER_COMPILATION_INFO_BUFFER_SIZE 512
 
@@ -8,20 +12,50 @@ namespace WCCEngine
 {
 	Shader::Shader(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)
 	{
+		Timer oTimer;
 		if (!Create(strVertexShaderSourceFilePath, strFragmentShaderSourceFilePath))
 		{
 			WCC_CORE_ERROR("Shader creation failed.");
 		}
-	}
 
-	void Shader::Bind()
-	{
-		glUseProgram(m_nShaderProgramID);
+		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
 	}
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_nShaderProgramID);
+		glDeleteProgram(m_nObjectID);
+	}
+
+	void Shader::Generate()
+	{
+	}
+
+	void Shader::Bind() const
+	{
+		glUseProgram(m_nObjectID);
+	}
+
+	void Shader::SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind /*= false*/)
+	{
+		if (bBind)
+			Bind();
+
+		glUniformMatrix4fv(glGetUniformLocation(m_nObjectID, strName.c_str()), 1, false, glm::value_ptr(oMatrix));
+	}
+
+	void Shader::SetVector3(IN const std::string& strName, IN const glm::vec3& oVector3, OPTIONAL bool bBind /*= false*/)
+	{
+		if (bBind)
+			Bind();
+
+		glUniform3f(glGetUniformLocation(this->m_nObjectID, strName.c_str()), oVector3.x, oVector3.y, oVector3.z);
+	}
+
+	void Shader::SetInteger(IN const std::string& strName, IN const int nInteger, OPTIONAL bool bBind /*= false*/)
+	{
+		if (bBind)
+			Bind();
+		glUniform1i(glGetUniformLocation(this->m_nObjectID, strName.c_str()), nInteger);
 	}
 
 	const bool Shader::Create(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)
@@ -66,20 +100,20 @@ namespace WCCEngine
 		glGetShaderiv(nFragmentShaderProgram, GL_COMPILE_STATUS, &bIsSuccessful);
 		if (!bIsSuccessful)
 		{
-			glGetShaderInfoLog(nFragmentShaderProgram, 512, NULL, shaderCompilationInfoBuffer);
+			glGetShaderInfoLog(nFragmentShaderProgram, SHADER_COMPILATION_INFO_BUFFER_SIZE, NULL, shaderCompilationInfoBuffer);
 			WCC_CORE_ERROR(shaderCompilationInfoBuffer);
 			return false;
 		}
 
-		m_nShaderProgramID = glCreateProgram();
-		glAttachShader(m_nShaderProgramID, nVertexShaderProgram);
-		glAttachShader(m_nShaderProgramID, nFragmentShaderProgram);
-		glLinkProgram(m_nShaderProgramID);
+		m_nObjectID = glCreateProgram();
+		glAttachShader(m_nObjectID, nVertexShaderProgram);
+		glAttachShader(m_nObjectID, nFragmentShaderProgram);
+		glLinkProgram(m_nObjectID);
 
-		glGetProgramiv(m_nShaderProgramID, GL_LINK_STATUS, &bIsSuccessful);
+		glGetProgramiv(m_nObjectID, GL_LINK_STATUS, &bIsSuccessful);
 		if (!bIsSuccessful)
 		{
-			glGetProgramInfoLog(m_nShaderProgramID, 512, NULL, shaderCompilationInfoBuffer);
+			glGetProgramInfoLog(m_nObjectID, SHADER_COMPILATION_INFO_BUFFER_SIZE, NULL, shaderCompilationInfoBuffer);
 			WCC_CORE_ERROR(shaderCompilationInfoBuffer);
 			return false;
 		}
