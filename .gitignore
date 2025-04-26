@@ -368,3 +368,5 @@ FodyWeavers.xsd
 /.vscode
 /WCCEngine/vendor/Glad/bin-int/Debug-windows-x86_64/Glad
 /WCCEngine/vendor/Glad
+/Sandbox/Sandbox.vcxproj.filters
+/Sandbox/Sandbox.vcxproj
