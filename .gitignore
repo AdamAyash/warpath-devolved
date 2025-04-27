@@ -370,3 +370,4 @@ FodyWeavers.xsd
 /WCCEngine/vendor/Glad
 *..vcxproj.filters
 *.vcxproj
+*.filters
