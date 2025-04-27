@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "../Renderer/Renderer2D.h"
 #include "../EventSystem/EventSystem.h"
-#include "../EventSystem/EventImplementations/WindowCloseEvent.h"
+#include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
 
 namespace WCCEngine
 {
