@@ -5,6 +5,7 @@
 #include "../Renderer/Renderer2D.h"
 #include "../EventSystem/EventSystem.h"
 #include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
+#include "../LayerSystem/LayerStack.h"
 
 namespace WCCEngine
 {
@@ -26,14 +27,16 @@ namespace WCCEngine
 		virtual void OnEvent(IN BaseEvent& oEvent) override;
 		virtual void Render(Ref<Renderer2D> pRenderer);
 
+		void PushLayer(ILayer* pLayer);
+		void PushLayerOverlay(ILayer* pLayer);
+
 	private:
 		bool OnWindowClose(const WindowCloseEvent& oEvent);
 
 	private:
 		bool m_bIsRunning;
 		Scope<Window> m_pWindow;
+		Scope<LayerStack> m_pLayerStack;
 		Ref<Renderer2D> m_pRenderer;
 	};
 }
-
-

@@ -35,6 +35,10 @@ namespace WCCEngine
 		glUseProgram(m_nObjectID);
 	}
 
+	void Shader::UnBind() const
+	{
+	}
+
 	void Shader::SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind /*= false*/)
 	{
 		if (bBind)

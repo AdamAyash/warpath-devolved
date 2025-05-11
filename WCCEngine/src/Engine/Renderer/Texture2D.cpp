@@ -32,6 +32,10 @@ namespace WCCEngine
 		glBindTexture(GL_TEXTURE_2D, this->m_nObjectID);
 	}
 
+	void Texture2D::UnBind() const
+	{
+	}
+
 	constexpr inline unsigned int Texture2D::GetWidth() const
 	{
 		return m_nWidth;

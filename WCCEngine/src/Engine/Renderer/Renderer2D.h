@@ -4,13 +4,14 @@
 #include "../Core/OpenGL/VertexArray.h"
 #include "glm.hpp"
 #include "Shader/Shader.h"
+#include "../Core/Window.h"
 
 namespace WCCEngine
 {
 	class WCC_API Renderer2D
 	{
 	public:
-		Renderer2D();
+		Renderer2D(IN const WindowProperties& oWindowProperties);
 		~Renderer2D();
 
 	public:
@@ -24,6 +25,7 @@ namespace WCCEngine
 			IN float fRotation, IN glm::vec3& oColor);
 
 	private:
+		WindowProperties m_oWindowProperties;
 		Scope<VertexArray> m_pVertexArray;
 		Ref<Shader> m_oTexture2DShader;
 	};

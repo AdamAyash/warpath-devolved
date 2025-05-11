@@ -25,6 +25,10 @@ namespace WCCEngine
 	{
 	}
 
+	void VertexBuffer::VertexBufferLayout::UnBind() const
+	{
+	}
+
 	void VertexBuffer::VertexBufferLayout::Generate()
 	{
 		glVertexAttribPointer(m_nIndex, m_nComponentSize, m_eComponentType, m_bNormalized, m_nnStrideSize, m_pCurrentStideOffset);
@@ -46,6 +50,11 @@ namespace WCCEngine
 	void VertexBuffer::Bind() const
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_nObjectID);
+	}
+
+	void VertexBuffer::UnBind() const
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	void VertexBuffer::Generate()

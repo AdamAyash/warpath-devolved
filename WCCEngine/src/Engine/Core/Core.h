@@ -29,6 +29,7 @@
 #endif
 
 #include "Logger/Logger.h"
+#include "Messages/CoreMessages.h"
 #include "Assert.h"
 
 namespace WCCEngine 

@@ -13,6 +13,7 @@ namespace WCCEngine
 	public:
 		virtual void Generate();
 		virtual void Bind() const override;
+		virtual void UnBind() const override;
 
 		constexpr inline unsigned int GetWidth() const;
 		constexpr inline unsigned int GetHeight() const;

@@ -11,7 +11,8 @@
 		
 namespace WCCEngine 
 {
-	Renderer2D::Renderer2D()
+	Renderer2D::Renderer2D(IN const WindowProperties& oWindowProperties)
+		: m_oWindowProperties(oWindowProperties)
 	{
 		Initialize();
 	}
@@ -67,8 +68,8 @@ namespace WCCEngine
 		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl","assets/shaders/ExampleFragmentShader.glsl");
 		m_oTexture2DShader->Bind();
 
-		glm::mat4 oProjectionMatrix = glm::ortho(0.0f, static_cast<float>(1600),
-			static_cast<float>(900), 0.0f, -1.0f, 1.0f);
+		glm::mat4 oProjectionMatrix = glm::ortho(0.0f, static_cast<float>(m_oWindowProperties.m_nWidth),
+			static_cast<float>(m_oWindowProperties.m_nHeight), 0.0f, -1.0f, 1.0f);
 
 		m_oTexture2DShader->SetMatrix("oProjectionMatrix", oProjectionMatrix);
 		m_oTexture2DShader->SetInteger("oTexture0", 0);

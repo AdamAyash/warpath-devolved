@@ -1,5 +1,4 @@
 #pragma once
-
 #include "string"
 #include "../../Core/OpenGL/OpenGLObject.h"
 #include "GLFW/glfw3.h"
@@ -17,6 +16,7 @@ namespace WCCEngine
 	public:
 		virtual void Generate() override;
 		virtual void Bind() const override;
+		virtual void UnBind() const override;
 
 		void SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind = false);
 
@@ -25,7 +25,5 @@ namespace WCCEngine
 
 	private:
 		const bool Create(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath);
-
-	private:
 	};
 };

@@ -16,6 +16,7 @@ namespace WCCEngine
 	void Application::Run()
 	{
 		this->Initialize();
+		this->Load();
 
 		while (m_bIsRunning)
 		{
@@ -35,19 +36,25 @@ namespace WCCEngine
 
 		WindowProperties oWindowProperties;
 		m_pWindow = CreateScope<Window>(oWindowProperties);
-		m_pRenderer = CreateRef<Renderer2D>();
-
+		m_pRenderer = CreateRef<Renderer2D>(oWindowProperties);
+		m_pLayerStack = CreateScope<LayerStack>();
 		m_pWindow->SetEventListener(*this);
 	}
 
 	void Application::Update()
 	{
 		m_pWindow->OnUpdate();
+		for (int nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+		{
+			ILayer* pLayer = m_pLayerStack->GetAt(nIndex);
+			WCC_ASSERT(pLayer);
+
+			pLayer->Update();
+		}
 	}
 
 	void Application::Load()
 	{
-
 	}
 
 	bool Application::OnWindowClose(const WindowCloseEvent& oEvent)
@@ -58,12 +65,28 @@ namespace WCCEngine
 
 	void Application::OnEvent(IN BaseEvent& oEvent)
 	{
-
+		//Application level events.
 		EventDispatcher oEventDispatcher(oEvent);
 		oEventDispatcher.Dispatch<WindowCloseEvent>(WCC_BIND_EVENT(Application::OnWindowClose));
 	}
 
 	void Application::Render(Ref<Renderer2D> pRenderer)
+	{
+		for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+		{
+			ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
+			WCC_ASSERT(pLayer);
+
+			pLayer->Render(pRenderer);
+		}
+	}
+
+	void Application::PushLayer(ILayer* pLayer)
+	{
+		m_pLayerStack->PushLayer(pLayer);
+	}
+
+	void Application::PushLayerOverlay(ILayer* pLayer)
 	{
 	}
 }

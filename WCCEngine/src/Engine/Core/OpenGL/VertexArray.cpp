@@ -25,6 +25,11 @@ namespace WCCEngine
 		glBindVertexArray(m_nObjectID);
 	}
 
+	void VertexArray::UnBind() const
+	{
+		glBindVertexArray(0);
+	}
+
 	void VertexArray::AddVertexBuffer(Ref<VertexBuffer> pVertrexBuffer)
 	{
 		m_oVertexBufferArray.push_back(pVertrexBuffer);
