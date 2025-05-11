@@ -4,14 +4,14 @@
 namespace WCCEngine
 {
 	template<typename DataType>
-	class WCC_API MemmoryManagedArray
+	class WCC_API MemoryManagedArray
 	{
 	public:
-		MemmoryManagedArray()
+		MemoryManagedArray()
 		{
 		}
 
-		~MemmoryManagedArray() 
+		~MemoryManagedArray() 
 		{
 			Clear();
 		}

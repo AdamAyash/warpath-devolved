@@ -1,5 +1,5 @@
 #include "wccpch.h"
-#include "MemmoryManagedArray.h"
+#include "MemoryManagedArray.h"
 
 namespace WCCEngine
 {

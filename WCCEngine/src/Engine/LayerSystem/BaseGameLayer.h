@@ -1,7 +1,7 @@
 #pragma once
 #include "../Core/Core.h"
 #include "ILayer.h"
-#include "../Core/MemmoryManagement/MemmoryManagedArray.h"
+#include "../Core/MemoryManagement/MemoryManagedArray.h"
 #include "../GameObjects/GameObject.h"
 #include "../ResourceManager/ResourceManager.h"
 
@@ -29,6 +29,6 @@ namespace WCCEngine
 		virtual void LoadContent() PURE;
 
 	private:
-		MemmoryManagedArray<GameObject> m_oGameObjectArray;
+		MemoryManagedArray<GameObject> m_oGameObjectArray;
 	};
 }

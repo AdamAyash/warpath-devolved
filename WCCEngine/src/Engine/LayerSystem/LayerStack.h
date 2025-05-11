@@ -1,6 +1,6 @@
 #pragma once
 #include "ILayer.h"
-#include "../Core/MemmoryManagement/MemmoryManagedArray.h"
+#include "../Core/MemoryManagement/MemoryManagedArray.h"
 
 namespace WCCEngine
 {
@@ -18,6 +18,6 @@ namespace WCCEngine
 		inline ILayer* GetAt(const size_t nIndex);
 
 	private:
-		MemmoryManagedArray<ILayer> m_oLayersArray;
+		MemoryManagedArray<ILayer> m_oLayersArray;
 	};
 }
