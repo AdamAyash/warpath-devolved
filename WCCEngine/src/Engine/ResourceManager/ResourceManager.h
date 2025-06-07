@@ -46,5 +46,6 @@ namespace WCCEngine
 	private:
 		std::map <std::string, Ref<OpenGLObject>> m_ResourcesMap;
 		static ResourceManager* m_pResourceManager;
+		static std::mutex m_oMutex;
 	};
 }

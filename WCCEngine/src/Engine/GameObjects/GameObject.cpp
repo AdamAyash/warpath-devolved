@@ -5,18 +5,14 @@ namespace WCCEngine
 {
 	GameObject::GameObject()
 	{
+		nObjectId = UIDGenerator::GetInstance()->GetNextUniqueID();
 	}
 
 	GameObject::~GameObject()
 	{
 	}
 
-	const Ref<Texture2D> GameObject::GetTexure2D() const
-	{
-		return m_oTexture2D;
-	}
-
-	void GameObject::SetTexure2D(IN const Ref<Texture2D> oTexture2D)
+	void GameObject::SetTexture2D(IN const Ref<Texture2D> oTexture2D)
 	{
 		m_oTexture2D = oTexture2D;
 	}

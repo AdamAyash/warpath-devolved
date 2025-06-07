@@ -1,17 +1,19 @@
 #pragma once
 #include "../Core.h"
+ 
+#define ARRAY_ELEMENT_NOT_FOUND -1
 
 namespace WCCEngine
 {
 	template<typename DataType>
-	class WCC_API MemoryManagedArray
+	class MemoryManagedArray
 	{
 	public:
 		MemoryManagedArray()
 		{
 		}
 
-		~MemoryManagedArray() 
+		~MemoryManagedArray()
 		{
 			Clear();
 		}
@@ -28,6 +30,28 @@ namespace WCCEngine
 			DataType* pNewElement = new DataType();
 			*pNewElement = oElement;
 			m_oInternalArray.push_back(pNewElement);
+		}
+		 
+		template<typename Key>
+		const int LinearSearchSimple(IN Key oKey, IN size_t nnMemberOffset)
+		{
+			for (int nIndex = 0; nIndex < GetLenght(); ++nIndex)
+			{
+				DataType* const pElement = GetAt(nIndex);
+				if (!pElement)
+				{
+					WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
+					continue;
+				}
+
+				 const void* pCurrentKey = reinterpret_cast<const void*>
+					 (reinterpret_cast<PBYTE>(pElement) + nnMemberOffset);
+				
+				 if (memcmp(pCurrentKey, &oKey, sizeof(Key)) == 0)
+					 return nIndex;
+			}
+
+			return ARRAY_ELEMENT_NOT_FOUND;
 		}
 
 		constexpr size_t GetLenght() const

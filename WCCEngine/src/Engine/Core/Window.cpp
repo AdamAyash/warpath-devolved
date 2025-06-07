@@ -3,6 +3,7 @@
 #include <iostream>
 #include "OpenGL/OpenGLContext.h"
 #include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
+#include "../EventSystem/EventImplementations/InputEvents/MouseButtonPressedEvent.h"
 
 namespace WCCEngine
 {
@@ -42,9 +43,24 @@ namespace WCCEngine
 
 		glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow* pWindow)
 		{
-				const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
-				WindowCloseEvent oEvent;
-				oWindow.m_oEventListener->OnEvent(oEvent);
+			const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
+			WindowCloseEvent oWindowCloseEvent;
+			oWindow.m_oEventListener->OnEvent(oWindowCloseEvent);
+		});
+
+		glfwSetMouseButtonCallback(m_pWindow, [](GLFWwindow* pWindow, int nButton, int nAction, int nMods)
+		{
+			const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
+			if (nButton == GLFW_MOUSE_BUTTON_LEFT && nAction == GLFW_PRESS)
+			{
+				double dMousePositionX = 0;
+				double dMousePositionY = 0;
+					
+				glfwGetCursorPos(oWindow.m_pWindow, &dMousePositionX, &dMousePositionY);
+
+				MouseButtonPressedEvent oMouseButtonPressedEvent(MouseCodes::Button0, dMousePositionX, dMousePositionY);
+				oWindow.m_oEventListener->OnEvent(oMouseButtonPressedEvent);
+			}
 		});
 	}
 
