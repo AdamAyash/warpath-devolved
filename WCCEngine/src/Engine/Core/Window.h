@@ -28,7 +28,7 @@ namespace WCCEngine
 		std::string m_strTitle;
 	};
 
-	class WCC_API Window final : public IEventSender
+	class WCC_API Window final : public IEventPublisher
 	{
 	public:
 		Window(IN const WindowProperties& oWindowProperties);
@@ -44,6 +44,5 @@ namespace WCCEngine
 
 	private:
 		GLFWwindow* m_pWindow;
-		IEventListener* m_oEventListener;
 	};
 };

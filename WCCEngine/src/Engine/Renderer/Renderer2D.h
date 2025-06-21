@@ -20,6 +20,7 @@ namespace WCCEngine
 
 	private:
 		const bool Initialize();
+		void ClearBackgroundColor();
 
 		void DoTransformations(IN const glm::vec2& oPosition, const glm::vec2& oSize, 
 			IN float fRotation, IN glm::vec3& oColor);

@@ -15,7 +15,8 @@ namespace WCCEngine
 		virtual ~BaseGameLayer();
 
 	public:
-		virtual void OnEvent(IN BaseEvent& oEvent) override;
+		virtual void OnEvent(IN BaseEvent& oEvent) PURE;
+
 		virtual bool OnAttach() override;
 		virtual bool OnDetach() override;
 		virtual void Update() override;

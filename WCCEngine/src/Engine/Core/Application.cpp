@@ -44,6 +44,7 @@ namespace WCCEngine
 	void Application::Update()
 	{
 		m_pWindow->OnUpdate();
+
 		for (int nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
 		{
 			ILayer* pLayer = m_pLayerStack->GetAt(nIndex);
@@ -60,6 +61,7 @@ namespace WCCEngine
 	bool Application::OnWindowClose(const WindowCloseEvent& oEvent)
 	{
 		ShutDown();
+
 		return true;
 	}
 
@@ -68,6 +70,15 @@ namespace WCCEngine
 		//Application level events.
 		EventDispatcher oEventDispatcher(oEvent);
 		oEventDispatcher.Dispatch<WindowCloseEvent>(WCC_BIND_EVENT(Application::OnWindowClose));
+
+		//Layer level events.
+		for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+		{
+			ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
+			WCC_ASSERT(pLayer);
+
+			pLayer->OnEvent(oEvent);
+		}
 	}
 
 	void Application::Render(Ref<Renderer2D> pRenderer)

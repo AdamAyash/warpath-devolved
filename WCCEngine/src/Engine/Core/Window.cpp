@@ -8,7 +8,6 @@
 namespace WCCEngine
 {
 	Window::Window(IN const WindowProperties& oWindowProperties)
-		: m_oEventListener(nullptr)
 	{
 		Initialize(oWindowProperties);
 	}

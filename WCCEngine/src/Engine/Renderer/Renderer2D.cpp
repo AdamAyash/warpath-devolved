@@ -8,6 +8,8 @@
 #define TEXTURE_VERTEX_BUFFER_SIZE 24
 #define TEXTURE_VERTEX_BUFFER_LAYOUT_OFFSET 4
 #define TEXTURE_CENTER_OFFSET 0.5f
+
+#define LINE_VERTEX_BUFFER_SIZE 4
 		
 namespace WCCEngine 
 {
@@ -24,8 +26,7 @@ namespace WCCEngine
 	void Renderer2D::Render(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2* oSize /*= nullptr*/, 
 		OPTIONAL float fRotation /*= 0*/, OPTIONAL glm::vec3 oColor /* = glm::vec3(1.f)*/)
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		ClearBackgroundColor();
 
 		m_oTexture2DShader->Bind();
 
@@ -48,7 +49,8 @@ namespace WCCEngine
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-		float oVertices[] = {
+		float oVertices[] = 
+		{
 			// pos      // tex
 			0.0f, 1.0f, 0.0f, 1.0f,
 			1.0f, 0.0f, 1.0f, 0.0f,
@@ -76,6 +78,12 @@ namespace WCCEngine
 
 		WCC_CORE_INFO("Renderer initialized successfully.");
 		return true;
+	}
+
+	void Renderer2D::ClearBackgroundColor()
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void Renderer2D::DoTransformations(IN const glm::vec2& oPosition, const glm::vec2& oSize, IN float fRotation, IN glm::vec3& oColor)

@@ -17,13 +17,8 @@ namespace WCCEngine
 		m_oTexture2D = oTexture2D;
 	}
 
-	void GameObject::SetPosition(IN const glm::vec2& oPosition)
-	{
-		m_oPosition = oPosition;
-	}
-
 	void GameObject::Render(IN Renderer2D& oRenderer2D)
 	{
-		oRenderer2D.Render(m_oTexture2D, m_oPosition);
+		oRenderer2D.Render(m_oTexture2D, oPosition);
 	}
 }

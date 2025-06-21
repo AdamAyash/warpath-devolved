@@ -13,7 +13,7 @@ namespace WCCEngine
 	public:
 		const virtual EventType GetEventType() const override;
 
-	protected:
+	public:
 		double m_dMousePositionX;
 		double m_dMousePositionY;
 	};

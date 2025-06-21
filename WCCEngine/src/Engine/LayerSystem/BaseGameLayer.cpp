@@ -34,7 +34,7 @@ namespace WCCEngine
 			GameObject* const pGameObject = m_oGameObjectArray.GetAt(nIndex);
 			if (!pGameObject)
 			{
-				//TODO ERROR
+				WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
 				continue;
 			}
 
@@ -50,7 +50,7 @@ namespace WCCEngine
 			GameObject* const pGameObject = m_oGameObjectArray.GetAt(nIndex);
 			if (!pGameObject)
 			{
-				//TODO ERROR
+				WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
 				continue;
 			}
 

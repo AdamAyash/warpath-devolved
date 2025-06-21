@@ -18,13 +18,12 @@ namespace WCCEngine
 		virtual void Render(IN Renderer2D& oRenderer2D);
 
 		void SetTexture2D(IN const Ref<Texture2D> oTexture2D);
-		void SetPosition(IN const glm::vec2& oPosition);
 
 	public:
 		unsigned long nObjectId;
+		glm::vec2 oPosition;
 
 	protected:
 		Ref<Texture2D> m_oTexture2D;
-		glm::vec2 m_oPosition;
 	};
 };

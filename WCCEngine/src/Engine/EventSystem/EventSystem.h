@@ -60,17 +60,21 @@ namespace WCCEngine
 		virtual void OnEvent(IN BaseEvent& oEvent) PURE;
 	};
 
-	class WCC_API IEventSender
+	class WCC_API IEventPublisher
 	{
 	protected:
-		IEventSender()
+		IEventPublisher()
+			: m_oEventListener(nullptr)
 		{
 		}
-		virtual ~IEventSender()
+		virtual ~IEventPublisher()
 		{
 		}
 
 		virtual void SetEventListener(IN IEventListener& oEventListener) PURE;
+
+	protected:
+		IEventListener* m_oEventListener;
 	};
 
 }

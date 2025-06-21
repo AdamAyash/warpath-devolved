@@ -9,4 +9,7 @@ public:
 
 public:
 	virtual void Update() override;
+
+public:
+	glm::vec2 oTargetPosition;
 };
