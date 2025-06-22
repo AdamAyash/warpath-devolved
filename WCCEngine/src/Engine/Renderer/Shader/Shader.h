@@ -10,7 +10,9 @@ namespace WCCEngine
 	class WCC_API Shader : public OpenGLObject
 	{
 	public:
-		Shader(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath);
+		Shader(IN const std::string& strVertexShaderSourceFilePath, 
+				IN const std::string& strFragmentShaderSourceFilePath, const std::string& strShaderName);
+		
 		~Shader();
 
 	public:
@@ -25,5 +27,8 @@ namespace WCCEngine
 
 	private:
 		const bool Create(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath);
+
+	private:
+		std::string m_strShaderName;
 	};
 };

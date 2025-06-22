@@ -24,7 +24,7 @@ namespace WCCEngine
 		return m_pUIDGeneratorInstance;
 	}
 
-	constexpr unsigned long UIDGenerator::GetNextUniqueID() const
+	constexpr inline unsigned long UIDGenerator::GetNextUniqueID() const
 	{
 		return m_lUID++;
 	}

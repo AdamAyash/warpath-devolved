@@ -23,7 +23,7 @@ bool ExampleLayer::OnDetach()
 	return true;
 }
 
-void ExampleLayer::Update() 
+void ExampleLayer::Update(const WCCEngine::GameTime& oGameTime)
 {
 }
 

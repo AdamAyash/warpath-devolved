@@ -6,6 +6,7 @@
 #include "../EventSystem/EventSystem.h"
 #include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
 #include "../LayerSystem/LayerStack.h"
+#include "GameTime.h" 
 
 namespace WCCEngine
 {
@@ -37,6 +38,8 @@ namespace WCCEngine
 		bool m_bIsRunning;
 		Scope<Window> m_pWindow;
 		Scope<LayerStack> m_pLayerStack;
+		Scope<GameTime> m_pGameTime;
+
 		Ref<Renderer2D> m_pRenderer;
 	};
 }

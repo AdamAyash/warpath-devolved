@@ -12,6 +12,6 @@ public:
 	virtual void OnEvent(IN WCCEngine::BaseEvent& oEvent) override;
 	virtual bool OnAttach() override;
 	virtual bool OnDetach() override;
-	virtual void Update() override;
+	virtual void Update(const WCCEngine::GameTime& oGameTime) override;
 	virtual void Render(WCCEngine::Ref<WCCEngine::Renderer2D> pRenderer) override;
 };

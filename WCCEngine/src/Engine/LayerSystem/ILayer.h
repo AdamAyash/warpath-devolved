@@ -2,6 +2,7 @@
 #include "../Core/Core.h"
 #include "../EventSystem/EventSystem.h"
 #include "../Renderer/Renderer2D.h"
+#include "../Core/GameTime.h"
 
 namespace WCCEngine 
 {
@@ -15,7 +16,7 @@ namespace WCCEngine
 	public:
 		virtual bool OnAttach() PURE;
 		virtual bool OnDetach() PURE;
-		virtual void Update() PURE;
+		virtual void Update(const GameTime& oGameTime) PURE;
 		virtual void Render(IN Ref<Renderer2D> pRenderer) PURE;
 	};
 }

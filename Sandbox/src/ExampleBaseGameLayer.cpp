@@ -17,6 +17,7 @@ void ExampleBaseGameLayer::LoadContent()
 	m_pExampleGameObject = new ExampleGameObject();
 	m_pExampleGameObject->SetTexture2D(oTexture);
 	m_pExampleGameObject->oPosition = glm::vec2(200, 200);
+	m_pExampleGameObject->oTargetPosition = glm::vec2(200, 200);
 
 	AddGameObject(m_pExampleGameObject);
 }

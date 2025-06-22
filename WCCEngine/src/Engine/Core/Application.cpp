@@ -38,19 +38,22 @@ namespace WCCEngine
 		m_pWindow = CreateScope<Window>(oWindowProperties);
 		m_pRenderer = CreateRef<Renderer2D>(oWindowProperties);
 		m_pLayerStack = CreateScope<LayerStack>();
+		m_pGameTime = CreateScope<GameTime>();
+
 		m_pWindow->SetEventListener(*this);
 	}
 
 	void Application::Update()
 	{
 		m_pWindow->OnUpdate();
+		m_pGameTime->Calculate();
 
 		for (int nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
 		{
 			ILayer* pLayer = m_pLayerStack->GetAt(nIndex);
 			WCC_ASSERT(pLayer);
 
-			pLayer->Update();
+			pLayer->Update(*m_pGameTime);
 		}
 	}
 

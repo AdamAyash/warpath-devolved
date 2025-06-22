@@ -67,7 +67,10 @@ namespace WCCEngine
 		oVertexBuffer.Pack<float[TEXTURE_VERTEX_BUFFER_SIZE]>(oVertices, GL_STATIC_DRAW);
 		oVertexBuffer.AddLayout(TEXTURE_VERTEX_BUFFER_LAYOUT_OFFSET * sizeof(float));
 
-		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl","assets/shaders/ExampleFragmentShader.glsl");
+		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl"
+			,"assets/shaders/ExampleFragmentShader.glsl"
+			, "Default tetxure shader");
+
 		m_oTexture2DShader->Bind();
 
 		glm::mat4 oProjectionMatrix = glm::ortho(0.0f, static_cast<float>(m_oWindowProperties.m_nWidth),

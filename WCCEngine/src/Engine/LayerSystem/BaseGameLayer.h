@@ -4,7 +4,6 @@
 #include "../Core/MemoryManagement/MemoryManagedArray.h"
 #include "../GameObjects/GameObject.h"
 #include "../ResourceManager/ResourceManager.h"
-
 namespace WCCEngine
 {
 	class WCC_API BaseGameLayer : public ILayer
@@ -19,7 +18,7 @@ namespace WCCEngine
 
 		virtual bool OnAttach() override;
 		virtual bool OnDetach() override;
-		virtual void Update() override;
+		virtual void Update(const GameTime& oGameTime) override;
 		virtual void Render(IN Ref<Renderer2D> pRenderer) override;
 
 	protected:

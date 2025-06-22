@@ -12,6 +12,7 @@ namespace WCCEngine
 
 	public:
 		const virtual EventType GetEventType() const override;
+
 		EVENT_TYPE(EventTypeWindowClose);
 	};
 }

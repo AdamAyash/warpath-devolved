@@ -15,7 +15,7 @@ namespace WCCEngine
 
 	public:
 		static UIDGenerator* const GetInstance();
-		constexpr unsigned long GetNextUniqueID() const;
+		constexpr inline unsigned long GetNextUniqueID() const;
 
 	public:
 		void operator=(const UIDGenerator&) = delete;
