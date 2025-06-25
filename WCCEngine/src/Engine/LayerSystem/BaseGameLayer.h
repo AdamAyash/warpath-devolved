@@ -4,6 +4,7 @@
 #include "../Core/MemoryManagement/MemoryManagedArray.h"
 #include "../GameObjects/GameObject.h"
 #include "../ResourceManager/ResourceManager.h"
+
 namespace WCCEngine
 {
 	class WCC_API BaseGameLayer : public ILayer
