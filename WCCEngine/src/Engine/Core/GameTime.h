@@ -4,7 +4,7 @@
 
 namespace WCCEngine
 {
-	class GameTime final
+	class WCC_API GameTime final
 	{
 	public:
 		GameTime();

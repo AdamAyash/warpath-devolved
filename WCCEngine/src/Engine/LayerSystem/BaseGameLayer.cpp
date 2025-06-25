@@ -27,7 +27,7 @@ namespace WCCEngine
 		return true;
 	}
 
-	void BaseGameLayer::Update(const GameTime& oGameTime)
+	void BaseGameLayer::Update(IN const GameTime& oGameTime)
 	{
 		for (int nIndex = 0; nIndex < m_oGameObjectArray.GetLenght(); ++nIndex)
 		{
@@ -38,7 +38,7 @@ namespace WCCEngine
 				continue;
 			}
 
-			pGameObject->Update();
+			pGameObject->Update(oGameTime);
 
 		}
 	}

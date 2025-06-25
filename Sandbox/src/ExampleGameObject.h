@@ -8,7 +8,7 @@ public:
 	~ExampleGameObject();
 
 public:
-	virtual void Update() override;
+	virtual void Update(IN const WCCEngine::GameTime& oGameTime) override;
 
 public:
 	glm::vec2 oTargetPosition;

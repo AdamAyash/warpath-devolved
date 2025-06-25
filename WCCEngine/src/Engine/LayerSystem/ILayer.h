@@ -16,7 +16,7 @@ namespace WCCEngine
 	public:
 		virtual bool OnAttach() PURE;
 		virtual bool OnDetach() PURE;
-		virtual void Update(const GameTime& oGameTime) PURE;
+		virtual void Update(IN const GameTime& oGameTime) PURE;
 		virtual void Render(IN Ref<Renderer2D> pRenderer) PURE;
 	};
 }

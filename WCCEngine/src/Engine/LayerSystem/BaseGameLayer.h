@@ -18,7 +18,7 @@ namespace WCCEngine
 
 		virtual bool OnAttach() override;
 		virtual bool OnDetach() override;
-		virtual void Update(const GameTime& oGameTime) override;
+		virtual void Update(IN const GameTime& oGameTime) override;
 		virtual void Render(IN Ref<Renderer2D> pRenderer) override;
 
 	protected:

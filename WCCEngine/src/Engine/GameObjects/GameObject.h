@@ -3,6 +3,7 @@
 #include "../Renderer/Texture2D.h"
 #include "../Renderer/Renderer2D.h"
 #include "../Core/UIDGenerator.h"
+#include "../Core/GameTime.h"
 
 namespace WCCEngine
 {
@@ -14,7 +15,7 @@ namespace WCCEngine
 		virtual ~GameObject();
 
 	public:
-		virtual void Update() PURE;
+		virtual void Update(IN const GameTime& oGameTime) PURE;
 		virtual void Render(IN Renderer2D& oRenderer2D);
 
 		void SetTexture2D(IN const Ref<Texture2D> oTexture2D);
