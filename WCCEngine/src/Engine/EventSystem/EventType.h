@@ -1,6 +1,8 @@
 enum EventType : short
 {
-	EventTypeWindowClose
+	EventTypeWindowClose,
+	EventTypeMouseButton,
+	EventTypeMouseButtonPressed
 };
 
 enum EventCategory : short

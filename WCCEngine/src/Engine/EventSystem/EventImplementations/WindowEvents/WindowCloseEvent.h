@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../EventSystem.h"
+#include "../../EventSystem.h"
 
 namespace WCCEngine
 {
@@ -12,6 +12,7 @@ namespace WCCEngine
 
 	public:
 		const virtual EventType GetEventType() const override;
+
 		EVENT_TYPE(EventTypeWindowClose);
 	};
 }

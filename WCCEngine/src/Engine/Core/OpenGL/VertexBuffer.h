@@ -19,6 +19,7 @@ namespace WCCEngine
 		public:
 			virtual void Generate() override;
 			virtual void Bind() const override;
+			virtual void UnBind() const override;
 
 		private:
 			unsigned int m_nIndex;
@@ -36,6 +37,7 @@ namespace WCCEngine
 	public:
 		virtual void Generate() override; 
 		virtual void Bind() const override;
+		virtual void UnBind() const override;
 
 		void AddLayout(std::size_t nnStrideSize, int nComponentSize = FOUR_COMPONENT_SIZE, GLenum eComponentType = GL_FLOAT,
 			GLboolean bNormalized = GL_FALSE, const void* pCurrentStideOffset = (void*)0);

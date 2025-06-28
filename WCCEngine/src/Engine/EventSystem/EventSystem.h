@@ -36,7 +36,7 @@ namespace WCCEngine
 		{
 			if (m_oEvent.GetEventType() == Event::GetStaticEventType())
 			{
-				m_oEvent.bIsHandled = oEventCallback(dynamic_cast<const Event&>(m_oEvent));
+				m_oEvent.bIsHandled |= oEventCallback(dynamic_cast<const Event&>(m_oEvent));
 			}
 
 			return true;
@@ -60,17 +60,21 @@ namespace WCCEngine
 		virtual void OnEvent(IN BaseEvent& oEvent) PURE;
 	};
 
-	class WCC_API IEventSender
+	class WCC_API IEventPublisher
 	{
 	protected:
-		IEventSender()
+		IEventPublisher()
+			: m_oEventListener(nullptr)
 		{
 		}
-		virtual ~IEventSender()
+		virtual ~IEventPublisher()
 		{
 		}
 
-		virtual void SetEventListener(IEventListener& oEventListener) PURE;
+		virtual void SetEventListener(IN IEventListener& oEventListener) PURE;
+
+	protected:
+		IEventListener* m_oEventListener;
 	};
 
 }

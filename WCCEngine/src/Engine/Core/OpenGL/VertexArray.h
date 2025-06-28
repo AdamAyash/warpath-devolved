@@ -14,6 +14,7 @@ namespace WCCEngine
 	public:
 		virtual void Generate() override;
 		virtual void Bind() const override;
+		virtual void UnBind() const override;
 
 		void AddVertexBuffer(Ref<VertexBuffer> pVertrexBuffer);
 

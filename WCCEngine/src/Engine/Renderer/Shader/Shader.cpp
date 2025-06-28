@@ -10,7 +10,9 @@
 
 namespace WCCEngine
 {
-	Shader::Shader(IN const std::string& strVertexShaderSourceFilePath, IN const std::string& strFragmentShaderSourceFilePath)
+	Shader::Shader(IN const std::string& strVertexShaderSourceFilePath, 
+		IN const std::string& strFragmentShaderSourceFilePath, const std::string& strShaderName)
+		: m_strShaderName(strShaderName)
 	{
 		Timer oTimer;
 		if (!Create(strVertexShaderSourceFilePath, strFragmentShaderSourceFilePath))
@@ -18,7 +20,7 @@ namespace WCCEngine
 			WCC_CORE_ERROR("Shader creation failed.");
 		}
 
-		WCC_CORE_WARN("Shader creation took: {0} ms.", oTimer.ElapsedMilliseconds());
+		WCC_CORE_WARN("Shader ({0}) creation took: {1} ms.", m_strShaderName, oTimer.ElapsedMilliseconds());
 	}
 
 	Shader::~Shader()
@@ -33,6 +35,10 @@ namespace WCCEngine
 	void Shader::Bind() const
 	{
 		glUseProgram(m_nObjectID);
+	}
+
+	void Shader::UnBind() const
+	{
 	}
 
 	void Shader::SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind /*= false*/)
