@@ -371,3 +371,4 @@ FodyWeavers.xsd
 *..vcxproj.filters
 *.vcxproj
 *.filters
+/WarcraftClone.sln
