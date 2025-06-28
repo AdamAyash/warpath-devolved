@@ -7,3 +7,6 @@
 [submodule "WCCEngine/vendor/GLM"]
 	path = WCCEngine/vendor/GLM
 	url = https://github.com/g-truc/glm.git
+[submodule "WCCEngine/vendor/ImGUI"]
+	path = WCCEngine/vendor/ImGUI
+	url = https://github.com/TheCherno/imgui/

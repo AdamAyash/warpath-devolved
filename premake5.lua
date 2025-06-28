@@ -15,9 +15,11 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "WCCEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "WCCEngine/vendor/Glad/include"
 IncludeDir["GLM"] = "WCCEngine/vendor/GLM/glm"
+IncludeDir["ImGUI"] = "WCCEngine/vendor/ImGUI"
 
 include "WCCEngine/vendor/GLFW"
 include "WCCEngine/vendor/Glad"
+include "WCCEngine/vendor/ImGUI"
 
 project "WCCEngine"
     location "WCCEngine"
@@ -49,6 +51,7 @@ project "WCCEngine"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.GLM}",
+        "%{IncludeDir.ImGUI}",
         "vendor/GLM/glm/**.hpp",
 		"vendor/GLM/glm/**.inl",
     }
@@ -58,6 +61,8 @@ project "WCCEngine"
         "GLFW",
         "Glad",
         "opengl32.lib",
+        "ImGUI"
+
     }
 
     filter "system:windows"
