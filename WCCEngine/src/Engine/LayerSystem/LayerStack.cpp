@@ -11,14 +11,16 @@ namespace WCCEngine
 	{
 	}
 
-	void LayerStack::PushLayer(ILayer* oLayer)
+	void LayerStack::PushLayer(ILayer* const oLayer)
 	{
 		m_oLayersArray.AppendNew(oLayer);
 		oLayer->OnAttach();
 	}
 
-	void LayerStack::PushOverlay(ILayer* oLayer)
+	void LayerStack::PushOverlay(ILayer* const oLayer)
 	{
+		m_oLayersArray.AppendNew(oLayer);
+		oLayer->OnAttach();
 	}
 
 	constexpr inline size_t LayerStack::GetLenght() const

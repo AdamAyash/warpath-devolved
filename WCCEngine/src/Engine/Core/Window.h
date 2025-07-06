@@ -37,6 +37,7 @@ namespace WCCEngine
 	public:
 		void OnUpdate();
 		void SetEventListener(IN IEventListener& oventListener) override;
+		constexpr GLFWwindow* GetNativeWindow() const;
 
 	private:
 		void Initialize(IN const WindowProperties& oWindowProperties);

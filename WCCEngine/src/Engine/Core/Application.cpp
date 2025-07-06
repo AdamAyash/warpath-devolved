@@ -4,9 +4,14 @@
 
 namespace WCCEngine
 {
+	Application* Application::m_pApplicationInstance = nullptr;
+	std::mutex Application::m_oMutex;
+
 	Application::Application()
 		: m_bIsRunning(true)
 	{
+		WCC_ASSERT(!m_pApplicationInstance, "Application already exists");
+		m_pApplicationInstance = this;
 	}
 
 	Application::~Application()
@@ -28,6 +33,21 @@ namespace WCCEngine
 	void Application::ShutDown()
 	{
 		m_bIsRunning = false;
+	}
+
+	Window& Application::GetWindow() const
+	{
+		return *m_pWindow;
+	}
+
+	Application* Application::GetInstance()
+	{
+		std::lock_guard<std::mutex> lock(m_oMutex);
+
+		if (m_pApplicationInstance == nullptr)
+			m_pApplicationInstance = new Application();
+
+		return m_pApplicationInstance;
 	}
 
 	void Application::Initialize()
@@ -102,6 +122,7 @@ namespace WCCEngine
 
 	void Application::PushLayerOverlay(ILayer* pLayer)
 	{
+		m_pLayerStack->PushOverlay(pLayer);
 	}
 }
 

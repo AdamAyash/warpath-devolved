@@ -36,7 +36,6 @@ namespace WCCEngine
 		glfwMakeContextCurrent(m_pWindow);
 		glfwSetWindowUserPointer(m_pWindow, reinterpret_cast<void*>(this));
 
-
 		oOpenGLContext.InitializeGlad();
 		oOpenGLContext.DisplayOpenGLContextInfo();
 
@@ -78,5 +77,10 @@ namespace WCCEngine
 	void Window::SetEventListener(IN IEventListener& oEventListener)
 	{
 		m_oEventListener = &oEventListener;
+	}
+
+	constexpr GLFWwindow* Window::GetNativeWindow() const
+	{
+		return m_pWindow;
 	}
 }

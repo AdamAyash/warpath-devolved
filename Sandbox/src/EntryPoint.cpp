@@ -3,6 +3,8 @@
 
 int main()
 {
-	Sandbox* application = new Sandbox();
-	application->Run();
+	Sandbox* pSandbox = new Sandbox();
+	pSandbox->Run();
+
+	delete pSandbox;
 }

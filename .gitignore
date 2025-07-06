@@ -372,3 +372,4 @@ FodyWeavers.xsd
 *.vcxproj
 *.filters
 /WarcraftClone.sln
+/Sandbox/imgui.ini

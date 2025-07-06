@@ -62,7 +62,6 @@ project "WCCEngine"
         "Glad",
         "opengl32.lib",
         "ImGUI"
-
     }
 
     filter "system:windows"
