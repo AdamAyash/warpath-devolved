@@ -20,6 +20,9 @@ namespace WCCEngine
 	public:
 		void Run();
 		void ShutDown();
+		Window& GetWindow() const;
+
+		static Application* GetInstance();
 
 	protected:
 		virtual void Initialize();
@@ -39,7 +42,9 @@ namespace WCCEngine
 		Scope<Window> m_pWindow;
 		Scope<LayerStack> m_pLayerStack;
 		Scope<GameTime> m_pGameTime;
-
 		Ref<Renderer2D> m_pRenderer;
+
+		static Application* m_pApplicationInstance;
+		static std::mutex m_oMutex;
 	};
 }

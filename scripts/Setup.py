@@ -10,7 +10,7 @@ print("Do you wish to download \"Premake\"? y/n ")
 
 PREMAKE5_DOWNLOAD_URL = ("https://github.com/premake/premake-core/releases/download/v5.0.0-beta6/premake-5.0.0-beta6-windows.zip")
 PREMAKE5_ZIP_FILE_NAME = "premake.zip"
-VENDOR_FOLDER_RELATIVE_PATH = "../vendor/bin"
+VENDOR_FOLDER_RELATIVE_PATH = "/vendor/bin"
 ANIMATION_TIMEOUT = 0.05
 
 shouldDownloadPreamke = input()
@@ -25,7 +25,6 @@ with zipfile.ZipFile(PREMAKE5_ZIP_FILE_NAME, 'r') as zipFileReference:
     zipFileReference.extractall(VENDOR_FOLDER_RELATIVE_PATH)
      
 os.remove(PREMAKE5_ZIP_FILE_NAME)
-subprocess.call(["../vendor/bin/premake5.exe", "vs2022"])
+subprocess.call(["/vendor/bin/premake5.exe", "vs2022"])
 animationLoader.stop()
-
 print("WCC Engine setup has completed.")

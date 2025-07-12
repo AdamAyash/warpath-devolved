@@ -11,8 +11,8 @@ namespace WCCEngine
 		~LayerStack();
 
 	public:
-		void PushLayer(ILayer* oLayer);
-		void PushOverlay(ILayer* oLayer);
+		void PushLayer(ILayer* const oLayer);
+		void PushOverlay(ILayer* const oLayer);
 
 		constexpr inline size_t GetLenght() const;
 		inline ILayer* GetAt(const size_t nIndex);
