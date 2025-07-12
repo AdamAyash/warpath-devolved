@@ -3,7 +3,7 @@
 	url = https://github.com/gabime/spdlog
 [submodule "WCCEngine/vendor/GLFW"]
 	path = WCCEngine/vendor/GLFW
-	url = https://github.com/TheCherno/GLFW
+	url = https://github.com/TheCherno/glfw
 [submodule "WCCEngine/vendor/GLM"]
 	path = WCCEngine/vendor/GLM
 	url = https://github.com/g-truc/glm.git
