@@ -1,6 +1,6 @@
 include "dependencies.lua"
 
-workspace "WarcraftClone"
+workspace "WarpathDevolved"
     architecture "x64"
     startproject "Sandbox"
 
