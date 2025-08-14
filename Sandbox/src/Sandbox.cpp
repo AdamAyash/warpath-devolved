@@ -16,7 +16,7 @@ Sandbox::~Sandbox()
 
 void Sandbox::Initialize()
 {
-	__super::Initialize();
+	BASE::Initialize();
 
 	WCCEngine::ResourceManager& oResourceManager = WCCEngine::ResourceManager::GetResourceManagerInstance();
 	oResourceManager.LoadTexture2D("testTexture", "assets/textures/WoodenTexture.png");

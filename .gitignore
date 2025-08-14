@@ -373,3 +373,4 @@ FodyWeavers.xsd
 *.filters
 /WarcraftClone.sln
 /Sandbox/imgui.ini
+*.sln
