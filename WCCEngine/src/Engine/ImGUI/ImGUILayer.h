@@ -7,7 +7,6 @@ namespace WCCEngine
 	{
 	protected:
 		ImGUILayer();
-	protected:
 		virtual ~ImGUILayer();
 
 	public:

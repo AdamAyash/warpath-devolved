@@ -7,7 +7,7 @@
 #define DEFAULT_WINDOW_WIDTH 1600
 #define DEFAULT_WINDOW_HEIGHT 900
 
-#define DEFAULT_TITLE "Warcraft Clone"
+#define DEFAULT_TITLE "Application"
 
 namespace WCCEngine
 {
@@ -25,6 +25,7 @@ namespace WCCEngine
 
 		int m_nWidth;
 		int m_nHeight;
+
 		std::string m_strTitle;
 	};
 

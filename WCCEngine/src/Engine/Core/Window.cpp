@@ -29,6 +29,7 @@ namespace WCCEngine
 			oWindowProperties.m_strTitle.c_str()
 			, nullptr, nullptr);
 
+
 		WCC_ASSERT(m_pWindow);
 
 		WCC_CORE_INFO("Creating window {0} ({1}, {2})", oWindowProperties.m_strTitle, oWindowProperties.m_nWidth, oWindowProperties.m_nHeight);
@@ -44,6 +45,11 @@ namespace WCCEngine
 			const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
 			WindowCloseEvent oWindowCloseEvent;
 			oWindow.m_oEventListener->OnEvent(oWindowCloseEvent);
+		});
+
+		glfwSetFramebufferSizeCallback(m_pWindow, [](GLFWwindow * pWindow, int nWidth, int nHeight)
+		{
+			glViewport(0, 0, nWidth, nHeight);
 		});
 
 		glfwSetMouseButtonCallback(m_pWindow, [](GLFWwindow* pWindow, int nButton, int nAction, int nMods)

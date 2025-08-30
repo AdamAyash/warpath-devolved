@@ -19,7 +19,7 @@ namespace WCCEngine
 
 	constexpr ResourceManager& ResourceManager::GetResourceManagerInstance()
 	{
-		std::lock_guard<std::mutex> lock(m_oMutex);
+		std::lock_guard<std::mutex> oLock(m_oMutex);
 		if (m_pResourceManager == nullptr)
 			m_pResourceManager = new ResourceManager();
 

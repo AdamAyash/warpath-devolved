@@ -19,6 +19,6 @@ namespace WCCEngine
 
 	void GameObject::Render(IN Renderer2D& oRenderer2D)
 	{
-		oRenderer2D.Render(m_oTexture2D, oPosition);
+		oRenderer2D.RenderTexture(m_oTexture2D, oPosition);
 	}
 }
