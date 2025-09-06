@@ -25,4 +25,5 @@ group ""
 
 group "Misc"
 	include "Sandbox"
+    include "UnitTests"
 group ""

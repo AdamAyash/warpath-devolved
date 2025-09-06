@@ -1,5 +1,4 @@
 project "WCCEngine"
-    location "WCCEngine"
     kind "SharedLib"
     language "C++"
     staticruntime "off"
@@ -9,6 +8,8 @@ project "WCCEngine"
 
     pchheader "wccpch.h"
     pchsource "src/wccpch.cpp"
+
+    externalwarnings "Off"
 
     buildoptions
     {
@@ -61,7 +62,8 @@ project "WCCEngine"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../../bin/" .. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/UnitTests")
         }
 
     filter "configurations:Debug"

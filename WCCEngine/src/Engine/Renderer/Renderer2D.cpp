@@ -3,6 +3,7 @@
 #include "glad/glad.h"
 #include "../Core/OpenGL/VertexBuffer.h" 
 #include <gtc/matrix_transform.hpp>
+#include "../Core/Utilities.h"
 
 #define TEXTURE_QUAD_VERTECES_SIZE 6
 #define TEXTURE_VERTEX_BUFFER_SIZE 24
@@ -11,10 +12,11 @@
 
 #define LINE_VERTEX_BUFFER_SIZE 4
 		
-namespace WCCEngine 
+namespace WCCEngine
 {
 	Renderer2D::Renderer2D(IN const WindowProperties& oWindowProperties)
 		: m_oWindowProperties(oWindowProperties)
+		, m_oBackgroundColor(0)
 	{
 		Initialize();
 	}
@@ -23,7 +25,7 @@ namespace WCCEngine
 	{
 	}
 
-	void Renderer2D::Render(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2* oSize /*= nullptr*/, 
+	void Renderer2D::RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2* oSize /*= nullptr*/, 
 		OPTIONAL float fRotation /*= 0*/, OPTIONAL glm::vec3 oColor /* = glm::vec3(1.f)*/)
 	{
 		ClearBackgroundColor();
@@ -42,6 +44,43 @@ namespace WCCEngine
 		glDrawArrays(GL_TRIANGLES, 0, TEXTURE_QUAD_VERTECES_SIZE);
 
 		delete oSize;
+	}
+
+	void Renderer2D::RenderLine(IN const glm::vec2& oStartPosition, IN const glm::vec2& oEndPosition
+		, OPTIONAL float fLineThickness /*= 1.f*/
+		, OPTIONAL glm::vec3 oColor /*= glm::vec3(1.f)*/)
+	{
+		ClearBackgroundColor();
+
+		const glm::vec2 oNormalizedStartPosition = Utilities::TransformPixelCoordinatesToNDC(oStartPosition, m_oWindowProperties.m_nWidth,
+			m_oWindowProperties.m_nHeight);
+
+		const glm::vec2 oNormalizedEndPosition = Utilities::TransformPixelCoordinatesToNDC(oEndPosition, m_oWindowProperties.m_nWidth,
+			m_oWindowProperties.m_nHeight);
+
+		float oVertices[] =
+		{
+			oNormalizedStartPosition.x, oNormalizedStartPosition.y,
+			oNormalizedEndPosition.x, oNormalizedEndPosition.y,
+		};
+
+		m_oLine2DShader->Bind();
+		m_oLine2DShader->SetVector3("oInputColor", oColor);
+
+		auto oVertexArray = CreateScope<VertexArray>();
+		oVertexArray->Bind();
+
+		VertexBuffer oVertexBuffer;
+		oVertexBuffer.Pack<float[4]>(oVertices, GL_STATIC_DRAW);
+		oVertexBuffer.AddLayout(2 * sizeof(float), 2, GL_FLOAT, GL_FALSE);
+
+		glLineWidth(fLineThickness);
+		glDrawArrays(GL_LINES, 0, 2);
+	}
+
+	void Renderer2D::SetBackgroundColor(IN const glm::vec4& oBackgroundColor)
+	{
+		m_oBackgroundColor = oBackgroundColor;
 	}
 
 	const bool Renderer2D::Initialize()
@@ -67,9 +106,13 @@ namespace WCCEngine
 		oVertexBuffer.Pack<float[TEXTURE_VERTEX_BUFFER_SIZE]>(oVertices, GL_STATIC_DRAW);
 		oVertexBuffer.AddLayout(TEXTURE_VERTEX_BUFFER_LAYOUT_OFFSET * sizeof(float));
 
+		m_oLine2DShader = CreateRef<Shader>("assets/shaders/ExampleLineVertexShader.glsl"
+			, "assets/shaders/ExampleLineFragmentShader.glsl"
+			, "Default line shader");
+
 		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl"
 			,"assets/shaders/ExampleFragmentShader.glsl"
-			, "Default tetxure shader");
+			, "Default texture shader");
 
 		m_oTexture2DShader->Bind();
 
@@ -85,7 +128,7 @@ namespace WCCEngine
 
 	void Renderer2D::ClearBackgroundColor()
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(m_oBackgroundColor.x, m_oBackgroundColor.y, m_oBackgroundColor.z, m_oBackgroundColor.w);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 

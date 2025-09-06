@@ -75,7 +75,7 @@ namespace WCCEngine
 					WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
 					continue;
 				}
-
+				
 				delete pElement;
 			}
 			m_oInternalArray.clear();

@@ -11,12 +11,10 @@ namespace WCCEngine
 	{
 	private:
 		ResourceManager();
+		ResourceManager(IN ResourceManager& otherResourceManager) = delete;
 
 	public:
 		~ResourceManager();
-
-	public:
-		ResourceManager(IN ResourceManager& otherResourceManager) = delete;
 
 	public:
 		void operator = (const ResourceManager&) = delete;

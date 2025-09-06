@@ -1,11 +1,12 @@
-project "Sandbox"
-    kind "ConsoleApp"
+project "UnitTests"
+    kind "SharedLib"
     language "C++"
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
-    
-    externalwarnings "Off"
+
+    pchheader "pch.h"
+    pchsource "src/pch.cpp"
 
     buildoptions
     {
@@ -22,20 +23,14 @@ project "Sandbox"
     {
         "%{wks.location}/WCCEngine/vendor/spdlog/include",
         "%{wks.location}/WCCEngine/src",
-        "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Glad}",
-        "%{IncludeDir.GLM}",
-        "%{IncludeDir.ImGUI}",
-        "vendor/GLM/glm/**.hpp",
-		"vendor/GLM/glm/**.inl",
     }
 
     links
     {
-        "WCCEngine",
+        "WCCEngine"
     }
 
-    filter "system:windows"
+     filter "system:windows"
         cppdialect "c++20"
         staticruntime "On"
         systemversion "latest"
