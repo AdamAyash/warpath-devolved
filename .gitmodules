@@ -10,3 +10,4 @@
 [submodule "WCCEngine/vendor/ImGUI"]
 	path = WCCEngine/vendor/ImGUI
 	url = https://github.com/AdamAyash/imgui
+	branch = main
