@@ -1,13 +1,28 @@
 #pragma once
 
 #include "../Core/Core.h"
-#include "EventType.h"
 #include <functional>
 
 #define WCC_BIND_EVENT(oFucntionReference) std::bind(&oFucntionReference, this, std::placeholders::_1)
 
 namespace WCCEngine
 {
+	enum class EventTypes
+	{
+		EventTypeWindowClose,
+		EventTypeWindowResize,
+		EventTypeMouseButton,
+		EventTypeMouseButtonPressed
+	};
+
+	enum EventCategory : short
+	{
+
+	};
+
+#define EVENT_CLASS_TYPE(type) static EventTypes GetStaticEventType() { return EventTypes::type; }\
+							   virtual const EventTypes GetEventType() const override { return GetStaticEventType(); }\
+
 	class WCC_API BaseEvent
 	{
 	protected:
@@ -15,7 +30,7 @@ namespace WCCEngine
 		virtual ~BaseEvent();
 
 	public:
-		const virtual EventType GetEventType() const PURE;
+		 virtual const EventTypes GetEventType() const PURE;
 
 	public:
 		bool bIsHandled;

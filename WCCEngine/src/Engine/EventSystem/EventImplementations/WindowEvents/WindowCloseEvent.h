@@ -11,8 +11,6 @@ namespace WCCEngine
 		~WindowCloseEvent();
 
 	public:
-		const virtual EventType GetEventType() const override;
-
-		EVENT_TYPE(EventTypeWindowClose);
+		EVENT_CLASS_TYPE(EventTypeWindowClose);
 	};
 }

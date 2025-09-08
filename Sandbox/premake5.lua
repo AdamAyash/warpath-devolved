@@ -1,6 +1,7 @@
 project "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "off"
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -42,12 +43,13 @@ project "Sandbox"
 
         defines 
         {
-            "WCC_WINDOWS_PLATFORM"
+            "WCC_WINDOWS_PLATFORM",
         }
 
     filter "configurations:Debug"
         defines "WCC_DEBUG"
         symbols "On"
+        runtime "Debug"
 
     
     filter "configurations:Release"

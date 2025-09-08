@@ -4,12 +4,18 @@
 namespace WCCEngine
 {
 	GameObject::GameObject()
+		: fRotation(0)
 	{
-		nObjectId = UIDGenerator::GetInstance()->GetNextUniqueID();
+		m_nnObjectId = UIDGenerator::GetInstance()->GetNextUniqueID();
 	}
 
 	GameObject::~GameObject()
 	{
+	}
+
+	constexpr inline __int64 GameObject::GetObjectId() const
+	{
+		return m_nnObjectId;
 	}
 
 	void GameObject::SetTexture2D(IN const Ref<Texture2D> oTexture2D)
@@ -19,6 +25,6 @@ namespace WCCEngine
 
 	void GameObject::Render(IN Renderer2D& oRenderer2D)
 	{
-		oRenderer2D.RenderTexture(m_oTexture2D, oPosition);
+		oRenderer2D.RenderTexture(m_oTexture2D, oPosition, nullptr, fRotation);
 	}
 }

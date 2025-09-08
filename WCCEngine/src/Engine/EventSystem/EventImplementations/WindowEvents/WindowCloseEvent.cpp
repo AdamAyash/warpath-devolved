@@ -10,9 +10,4 @@ namespace WCCEngine
 	WindowCloseEvent::~WindowCloseEvent()
 	{
 	}
-
-	const EventType WindowCloseEvent::GetEventType() const
-	{
-		return EventTypeWindowClose;
-	}
 }

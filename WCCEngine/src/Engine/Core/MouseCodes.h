@@ -3,7 +3,7 @@
 
 namespace WCCEngine
 {
-	enum MouseCodes : short
+	enum MouseCodes : int
 	{
 		Button0 = 0,
 		Button1 = 1,

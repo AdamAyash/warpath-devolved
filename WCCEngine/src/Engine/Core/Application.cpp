@@ -9,6 +9,7 @@ namespace WCCEngine
 
 	Application::Application()
 		: m_bIsRunning(true)
+		, m_bIsMinimized(false)
 	{
 		WCC_ASSERT(!m_pApplicationInstance, "Application already exists");
 		m_pApplicationInstance = this;
@@ -59,6 +60,9 @@ namespace WCCEngine
 		m_pRenderer = CreateRef<Renderer2D>(oWindowProperties);
 		m_pLayerStack = CreateScope<LayerStack>();
 		m_pGameTime = CreateScope<GameTime>();
+		m_pImGUILayer = new ImGUILayer();
+
+		PushLayerOverlay(m_pImGUILayer);
 
 		m_pWindow->SetEventListener(*this);
 	}
@@ -88,30 +92,52 @@ namespace WCCEngine
 		return true;
 	}
 
+	bool Application::OnWindowResize(const WindowResizeEvent& oEvent)
+	{
+		if (oEvent.GetWidth() == 0 && oEvent.GetHeight() == 0)
+			m_bIsMinimized = true;
+		else
+			m_bIsMinimized = false;
+
+		return true;
+	}
+
 	void Application::OnEvent(IN BaseEvent& oEvent)
 	{
 		//Application level events.
 		EventDispatcher oEventDispatcher(oEvent);
 		oEventDispatcher.Dispatch<WindowCloseEvent>(WCC_BIND_EVENT(Application::OnWindowClose));
+		oEventDispatcher.Dispatch<WindowResizeEvent>(WCC_BIND_EVENT(Application::OnWindowResize));
 
-		//Layer level events.
-		for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+		if (!m_bIsMinimized)
 		{
-			ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
-			WCC_ASSERT(pLayer);
+			//Layer level events.
+			for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+			{
+				ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
+				WCC_ASSERT(pLayer);
 
-			pLayer->OnEvent(oEvent);
+				pLayer->OnEvent(oEvent);
+			}
 		}
 	}
 
 	void Application::Render(Ref<Renderer2D> pRenderer)
 	{
-		for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+		if (!m_bIsMinimized)
 		{
-			ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
-			WCC_ASSERT(pLayer);
+			m_pImGUILayer->Begin();
+			{
+				for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+				{
+					ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
+					WCC_ASSERT(pLayer);
 
-			pLayer->Render(pRenderer);
+					pLayer->Render(pRenderer);
+					pLayer->OnImGuiRender();
+				}
+			}
+			m_pImGUILayer->End();
 		}
 	}
 

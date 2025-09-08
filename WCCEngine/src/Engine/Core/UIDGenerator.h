@@ -15,7 +15,7 @@ namespace WCCEngine
 
 	public:
 		static UIDGenerator* const GetInstance();
-		constexpr inline unsigned long GetNextUniqueID() const;
+		constexpr inline __int64 GetNextUniqueID() const;
 
 	public:
 		void operator=(const UIDGenerator&) = delete;
@@ -23,6 +23,6 @@ namespace WCCEngine
 	private:
 		static UIDGenerator* m_pUIDGeneratorInstance;
 		static std::mutex m_oMutex;
-		static unsigned long m_lUID;
+		static __int64 m_nnUID;
 	};
 };

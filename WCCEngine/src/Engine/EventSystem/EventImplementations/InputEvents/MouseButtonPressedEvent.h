@@ -6,14 +6,18 @@
 
 namespace WCCEngine
 {
-	class MouseButtonPressedEvent : public MouseButtonEvent
+	class WCC_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(IN const MouseCodes eMouseCode, IN const float fMousePositionX, IN const float fMousePositionY);
 		virtual ~MouseButtonPressedEvent();
 
+
 	public:
-		const virtual EventType GetEventType() const override;
-		EVENT_TYPE(EventTypeMouseButtonPressed);
+		constexpr MouseCodes GetMouseCode() const;
+		EVENT_CLASS_TYPE(EventTypeMouseButtonPressed);
+
+	private:
+		MouseCodes m_eMouseCode;
 	};
 }
