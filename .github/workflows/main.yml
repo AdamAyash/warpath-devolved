@@ -1,2 +1,19 @@
-- name: Install premake5
+runs-on: windows-latest
+
+steps:
+- name: Installing premake5
   uses: Jarod42/install-premake5@v6
+
+- name: Checkout
+  uses: actions/checkout@v4
+
+- name: run premake5
+  run: premake5 vs2022 --to=solution/vs2022
+
+- name: Add msbuild to PATH
+  uses: microsoft/setup-msbuild@v2
+
+- name: build
+  run: |
+    cd solution/vs2022
+    msbuild.exe /property:Configuration=Release MySolution.sln
