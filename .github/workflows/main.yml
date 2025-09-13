@@ -1,0 +1,2 @@
+- name: Install premake5
+  uses: Jarod42/install-premake5@v6
