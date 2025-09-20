@@ -64,7 +64,6 @@ namespace WCCEngine
 			return m_oInternalArray[nIndex];
 		}
 
-	private:
 		void Clear() 
 		{
 			for (int nIndex = 0; nIndex < m_oInternalArray.size(); ++nIndex)

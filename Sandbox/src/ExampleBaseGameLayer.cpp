@@ -22,7 +22,6 @@ void ExampleBaseGameLayer::LoadContent()
 	m_pExampleGameObject->oTargetPosition = glm::vec2(200, 200);
 
 	WCCEngine::RandomNumberGenerator oRandomNumberGenerator;
-
 	for (int nInex = 0; nInex < 1000; ++nInex)
 	{
 		const UINT nRandomPositionX = oRandomNumberGenerator.GetNextUnsignedInt(0, 1600);
@@ -47,7 +46,8 @@ void ExampleBaseGameLayer::OnEvent(IN WCCEngine::BaseEvent& oEvent)
 
 void ExampleBaseGameLayer::OnImGuiRender()
 {
-	ImGui::ShowMetricsWindow();
+	/*ImGui::Begin("Settings");
+	ImGui::End();*/
 }
 
 void ExampleBaseGameLayer::Render(IN WCCEngine::Ref<WCCEngine::Renderer2D> pRenderer)
