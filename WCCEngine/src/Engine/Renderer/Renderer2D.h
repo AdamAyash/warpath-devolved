@@ -22,11 +22,11 @@ namespace WCCEngine
 			, OPTIONAL float fLineThickness = 1.f
 			, OPTIONAL glm::vec3 oColor = glm::vec3(1.f));
 
+		void ClearBackgroundColor();
 		void SetBackgroundColor(IN const glm::vec4& oBackgroundColor);
 
 	private:
 		const bool Initialize();
-		void ClearBackgroundColor();
 
 		void DoTransformations(IN const glm::vec2& oPosition, const glm::vec2& oSize, 
 			IN float fRotation, IN glm::vec3& oColor);

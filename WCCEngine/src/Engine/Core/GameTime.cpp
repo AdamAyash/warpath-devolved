@@ -27,4 +27,9 @@ namespace WCCEngine
 	{
 		return m_dDeltaTime;
 	}
+
+	constexpr double inline GameTime::GetTotalGameTime() const
+	{
+		return m_dCurrentTime;
+	}
 }

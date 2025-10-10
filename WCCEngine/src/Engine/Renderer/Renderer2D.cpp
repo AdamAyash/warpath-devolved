@@ -28,8 +28,6 @@ namespace WCCEngine
 	void Renderer2D::RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2* oSize /*= nullptr*/, 
 		OPTIONAL float fRotation /*= 0*/, OPTIONAL glm::vec3 oColor /* = glm::vec3(1.f)*/)
 	{
-		ClearBackgroundColor();
-
 		m_oTexture2DShader->Bind();
 
 		const glm::vec2 oComputedSize = oSize != nullptr ? *oSize 
@@ -50,8 +48,6 @@ namespace WCCEngine
 		, OPTIONAL float fLineThickness /*= 1.f*/
 		, OPTIONAL glm::vec3 oColor /*= glm::vec3(1.f)*/)
 	{
-		ClearBackgroundColor();
-
 		const glm::vec2 oNormalizedStartPosition = Utilities::TransformPixelCoordinatesToNDC(oStartPosition, m_oWindowProperties.m_nWidth,
 			m_oWindowProperties.m_nHeight);
 

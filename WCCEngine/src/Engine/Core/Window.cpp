@@ -4,6 +4,7 @@
 #include "OpenGL/OpenGLContext.h"
 #include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
 #include "../EventSystem/EventImplementations/InputEvents/MouseButtonPressedEvent.h"
+#include "../EventSystem/EventImplementations/WindowEvents/WindowResizeEvent.h"
 
 namespace WCCEngine
 {
@@ -50,19 +51,24 @@ namespace WCCEngine
 		glfwSetFramebufferSizeCallback(m_pWindow, [](GLFWwindow * pWindow, int nWidth, int nHeight)
 		{
 			glViewport(0, 0, nWidth, nHeight);
+
+			const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
+
+			WindowResizeEvent oWindowResizeEvent(nWidth, nHeight);
+			oWindow.m_oEventListener->OnEvent(oWindowResizeEvent);
 		});
 
 		glfwSetMouseButtonCallback(m_pWindow, [](GLFWwindow* pWindow, int nButton, int nAction, int nMods)
 		{
 			const Window& oWindow = *reinterpret_cast<const Window*>(glfwGetWindowUserPointer(pWindow));
-			if (nButton == GLFW_MOUSE_BUTTON_LEFT && nAction == GLFW_PRESS)
+			if (nAction == GLFW_PRESS)
 			{
 				double dMousePositionX = 0;
 				double dMousePositionY = 0;
 					
 				glfwGetCursorPos(oWindow.m_pWindow, &dMousePositionX, &dMousePositionY);
 
-				MouseButtonPressedEvent oMouseButtonPressedEvent(MouseCodes::Button0, dMousePositionX, dMousePositionY);
+				MouseButtonPressedEvent oMouseButtonPressedEvent(static_cast<MouseCodes>(nButton), dMousePositionX, dMousePositionY);
 				oWindow.m_oEventListener->OnEvent(oMouseButtonPressedEvent);
 			}
 		});

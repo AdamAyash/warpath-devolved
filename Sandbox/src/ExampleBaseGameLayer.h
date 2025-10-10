@@ -13,7 +13,8 @@ public:
 public:
 	virtual void LoadContent() override;
 	virtual void OnEvent(IN WCCEngine::BaseEvent& oEvent) override;
-	virtual void Render(IN WCCEngine::Ref<WCCEngine::Renderer2D > pRenderer) override;
+	virtual void OnImGuiRender() override;
+	virtual void Render(IN WCCEngine::Ref<WCCEngine::Renderer2D> pRenderer) override;
 
 private:
 	bool OnMouseButtonPressedEvent(const WCCEngine::MouseButtonPressedEvent& oMouseButtonEvent);

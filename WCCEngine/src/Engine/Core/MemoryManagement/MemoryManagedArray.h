@@ -64,18 +64,18 @@ namespace WCCEngine
 			return m_oInternalArray[nIndex];
 		}
 
-	private:
 		void Clear() 
 		{
 			for (int nIndex = 0; nIndex < m_oInternalArray.size(); ++nIndex)
 			{
-				const DataType* const pElement = m_oInternalArray[nIndex];
+				const DataType* pElement = m_oInternalArray[nIndex];
 				if (!pElement)
 				{
 					WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
 					continue;
 				}
-				
+
+				pElement = nullptr;
 				delete pElement;
 			}
 			m_oInternalArray.clear();

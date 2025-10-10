@@ -11,7 +11,7 @@ namespace WCCEngine
 		virtual ~MouseButtonEvent();
 
 	public:
-		const virtual EventType GetEventType() const override;
+		const virtual EventTypes GetEventType() const override;
 
 	public:
 		double m_dMousePositionX;

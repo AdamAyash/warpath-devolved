@@ -5,7 +5,7 @@ namespace WCCEngine
 {
 	UIDGenerator* UIDGenerator::m_pUIDGeneratorInstance = nullptr;
 	std::mutex UIDGenerator::m_oMutex;
-	unsigned long UIDGenerator::m_lUID = 0;
+	__int64 UIDGenerator::m_nnUID = 0;
 
 	UIDGenerator::UIDGenerator()
 	{
@@ -24,8 +24,8 @@ namespace WCCEngine
 		return m_pUIDGeneratorInstance;
 	}
 
-	constexpr inline unsigned long UIDGenerator::GetNextUniqueID() const
+	constexpr inline __int64 UIDGenerator::GetNextUniqueID() const
 	{
-		return m_lUID++;
+		return m_nnUID++;
 	}
 };

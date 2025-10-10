@@ -10,6 +10,8 @@ ExampleGameObject::~ExampleGameObject()
 
 void ExampleGameObject::Update(IN const WCCEngine::GameTime& oGameTime)
 {
+	fRotation = oGameTime.GetTotalGameTime() * 100;
+
 	if (oPosition != oTargetPosition)
 	{
 		glm::vec2 oDirection = glm::normalize(glm::vec2(oTargetPosition - oPosition));

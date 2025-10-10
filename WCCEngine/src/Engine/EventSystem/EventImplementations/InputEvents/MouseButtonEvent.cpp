@@ -13,8 +13,8 @@ namespace WCCEngine
 	{
 	}
 
-	const EventType MouseButtonEvent::GetEventType() const
+	const EventTypes MouseButtonEvent::GetEventType() const
 	{
-		return EventType::EventTypeMouseButton;
+		return EventTypes::EventTypeMouseButton;
 	}
 }

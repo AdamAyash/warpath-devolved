@@ -39,12 +39,13 @@ namespace WCCEngine
 			}
 
 			pGameObject->Update(oGameTime);
-
 		}
 	}
 
 	void BaseGameLayer::Render(IN Ref<Renderer2D> pRenderer)
 	{
+		pRenderer->ClearBackgroundColor();
+
 		for (int nIndex = 0; nIndex < m_oGameObjectArray.GetLenght(); ++nIndex)
 		{
 			GameObject* const pGameObject = m_oGameObjectArray.GetAt(nIndex);
@@ -58,11 +59,11 @@ namespace WCCEngine
 		}
 	}
 
-	void BaseGameLayer::AddGameObject(IN GameObject* pGameObject) 
+	void BaseGameLayer::AddGameObject(IN GameObject* const pGameObject) 
 	{
 		m_oGameObjectArray.AppendNew(pGameObject);
 	}
-	
+
 	void BaseGameLayer::RemoveGameObject(IN GameObject* pGameObject)
 	{
 	}

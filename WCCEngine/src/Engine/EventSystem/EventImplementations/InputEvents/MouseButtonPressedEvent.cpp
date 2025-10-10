@@ -5,6 +5,7 @@ namespace WCCEngine
 {
 	MouseButtonPressedEvent::MouseButtonPressedEvent(IN const MouseCodes eMouseCode, IN const float fMousePositionX, IN const float fMousePositionY)
 		: MouseButtonEvent(fMousePositionX, fMousePositionY)
+		, m_eMouseCode(eMouseCode)
 	{
 	}
 
@@ -12,8 +13,8 @@ namespace WCCEngine
 	{
 	}
 
-	const EventType MouseButtonPressedEvent::GetEventType() const
+	constexpr MouseCodes MouseButtonPressedEvent::GetMouseCode() const
 	{
-		return EventType::EventTypeMouseButtonPressed;
+		return m_eMouseCode;
 	}
 }
