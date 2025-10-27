@@ -25,7 +25,7 @@ namespace WCCEngine
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_nObjectID);
+		Destroy();
 	}
 
 	void Shader::Generate()
@@ -39,6 +39,11 @@ namespace WCCEngine
 
 	void Shader::UnBind() const
 	{
+	}
+
+	void Shader::Destroy()
+	{
+		glDeleteProgram(m_nObjectID);
 	}
 
 	void Shader::SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind /*= false*/)
@@ -84,7 +89,7 @@ namespace WCCEngine
 			return false;
 		}
 
-		BOOL bIsSuccessful;
+		BOOL bIsSuccessful = FALSE;
 		char shaderCompilationInfoBuffer[SHADER_COMPILATION_INFO_BUFFER_SIZE];
 
 		const GLuint nVertexShaderProgram = glCreateShader(GL_VERTEX_SHADER);

@@ -20,6 +20,7 @@ namespace WCCEngine
 			virtual void Generate() override;
 			virtual void Bind() const override;
 			virtual void UnBind() const override;
+			virtual void Destroy() override;
 
 		private:
 			unsigned int m_nIndex;
@@ -38,9 +39,10 @@ namespace WCCEngine
 		virtual void Generate() override; 
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
+		virtual void Destroy() override;
 
-		void AddLayout(std::size_t nnStrideSize, int nComponentSize = FOUR_COMPONENT_SIZE, GLenum eComponentType = GL_FLOAT,
-			GLboolean bNormalized = GL_FALSE, const void* pCurrentStideOffset = (void*)0);
+		void AddLayout(IN const std::size_t nnStrideSize, OPTIONAL const  int nComponentSize = FOUR_COMPONENT_SIZE, OPTIONAL const GLenum eComponentType = GL_FLOAT,
+			OPTIONAL const GLboolean bNormalized = GL_FALSE, const void* pCurrentStideOffset = (void*)0);
 
 		template<class DataType>
 		void Pack(IN DataType& pData, IN const GLenum usage)

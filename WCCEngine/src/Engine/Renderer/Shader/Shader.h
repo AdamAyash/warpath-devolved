@@ -19,6 +19,7 @@ namespace WCCEngine
 		virtual void Generate() override;
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
+		virtual void Destroy() override;
 
 		void SetMatrix(IN const std::string& strName, IN const glm::mat4& oMatrix, OPTIONAL bool bBind = false);
 
