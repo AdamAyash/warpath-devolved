@@ -3,7 +3,7 @@
 #include "glad/glad.h"
 #include "../Core/OpenGL/VertexBuffer.h" 
 #include <gtc/matrix_transform.hpp>
-#include "../Core/Utilities.h"
+#include "../Common/Utilities.h"
 
 namespace WCCEngine
 {

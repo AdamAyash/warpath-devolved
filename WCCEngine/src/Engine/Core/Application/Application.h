@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Core.h"
+#include "../Core.h"
 #include "Window.h"
-#include "GameTime.h" 
-#include "../Renderer/Renderer2D.h"
-#include "../EventSystem/EventSystem.h"
-#include "../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
-#include "../EventSystem/EventImplementations/WindowEvents/WindowResizeEvent.h"
-#include "../LayerSystem/LayerStack.h"
-#include "../ImGUIImplementation/ImGUILayer.h"
+#include "../GameTime.h" 
+#include "../../Renderer/Renderer2D.h"
+#include "../../EventSystem/EventSystem.h"
+#include "../../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
+#include "../../EventSystem/EventImplementations/WindowEvents/WindowResizeEvent.h"
+#include "../../LayerSystem/LayerStack.h"
+#include "../../ImGUIImplementation/ImGUILayer.h"
 
 namespace WCCEngine
 {

@@ -4,7 +4,7 @@
 #include "../Core/OpenGL/VertexArray.h"
 #include "glm.hpp"
 #include "Shader/Shader.h"
-#include "../Core/Window.h"
+#include "../Core/Application/Window.h"
 
 namespace WCCEngine
 {

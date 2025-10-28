@@ -1,8 +1,8 @@
 #pragma once 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "Core.h"
-#include "../EventSystem/EventSystem.h"
+#include "../Core.h"
+#include "../../EventSystem/EventSystem.h"
 
 #define DEFAULT_WINDOW_WIDTH 1600
 #define DEFAULT_WINDOW_HEIGHT 900

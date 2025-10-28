@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Core/Application.h>
+#include <Engine/Core/Application/Application.h>
 #include <Engine/Renderer/Renderer2D.h>
 
 class Sandbox final : public WCCEngine::Application

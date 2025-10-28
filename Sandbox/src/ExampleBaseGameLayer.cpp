@@ -1,5 +1,5 @@
 #include "ExampleBaseGameLayer.h"
-#include "Engine/Core/RandomNumberGenerator.h"
+#include "Engine/Common/RandomNumberGenerator.h"
 #include <imgui.h>
 
 ExampleBaseGameLayer::ExampleBaseGameLayer()

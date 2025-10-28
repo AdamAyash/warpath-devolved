@@ -1,6 +1,6 @@
 #pragma once
 #include <mutex>
-#include "Core.h"
+#include "../Core/Core.h"
 
 namespace WCCEngine
 {
