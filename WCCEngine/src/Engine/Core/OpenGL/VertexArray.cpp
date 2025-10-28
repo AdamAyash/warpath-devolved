@@ -11,8 +11,7 @@ namespace WCCEngine
 
 	VertexArray::~VertexArray()
 	{
-		glDeleteVertexArrays(1, &m_nObjectID);
-		m_oVertexBufferArray.clear();
+		Destroy();
 	}
 
 	void VertexArray::Generate()
@@ -28,6 +27,12 @@ namespace WCCEngine
 	void VertexArray::UnBind() const
 	{
 		glBindVertexArray(0);
+	}
+
+	void VertexArray::Destroy()
+	{
+		glDeleteVertexArrays(1, &m_nObjectID);
+		m_oVertexBufferArray.clear();
 	}
 
 	void VertexArray::AddVertexBuffer(Ref<VertexBuffer> pVertrexBuffer)

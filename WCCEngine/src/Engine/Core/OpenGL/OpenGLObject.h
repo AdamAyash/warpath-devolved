@@ -18,6 +18,7 @@ namespace WCCEngine
 		virtual void Generate() PURE;
 		virtual void Bind() const PURE;
 		virtual void UnBind() const PURE;
+		virtual void Destroy()	PURE; 
 
 	protected:
 		unsigned int m_nObjectID;

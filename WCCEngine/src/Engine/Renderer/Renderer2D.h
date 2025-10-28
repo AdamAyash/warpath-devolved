@@ -4,7 +4,7 @@
 #include "../Core/OpenGL/VertexArray.h"
 #include "glm.hpp"
 #include "Shader/Shader.h"
-#include "../Core/Window.h"
+#include "../Core/Application/Window.h"
 
 namespace WCCEngine
 {
@@ -15,12 +15,8 @@ namespace WCCEngine
 		~Renderer2D();
 
 	public:
-		void RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2* oSize = nullptr,
+		void RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2 oSize = glm::vec2(),
 			OPTIONAL float fRotation = 0.0f, OPTIONAL glm::vec3 oColor = glm::vec3(1.0f));
-
-		void RenderLine(IN const glm::vec2& oStartPosition, IN const glm::vec2& oEndPosition
-			, OPTIONAL float fLineThickness = 1.f
-			, OPTIONAL glm::vec3 oColor = glm::vec3(1.f));
 
 		void ClearBackgroundColor();
 		void SetBackgroundColor(IN const glm::vec4& oBackgroundColor);
@@ -28,11 +24,11 @@ namespace WCCEngine
 	private:
 		const bool Initialize();
 
-		void DoTransformations(IN const glm::vec2& oPosition, const glm::vec2& oSize, 
-			IN float fRotation, IN glm::vec3& oColor);
+		const glm::mat4 CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize,
+			IN const float fRotation, IN const glm::vec3& oColor);
 
 	private:
-		WindowProperties m_oWindowProperties;
+		const WindowProperties& m_oWindowProperties;
 		Scope<VertexArray> m_pVertexArray;
 		Ref<Shader> m_oTexture2DShader;
 		Ref<Shader> m_oLine2DShader;

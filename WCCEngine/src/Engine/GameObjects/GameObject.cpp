@@ -25,6 +25,6 @@ namespace WCCEngine
 
 	void GameObject::Render(IN Renderer2D& oRenderer2D)
 	{
-		oRenderer2D.RenderTexture(m_oTexture2D, oPosition, nullptr, fRotation);
+		oRenderer2D.RenderTexture(m_oTexture2D, oPosition, m_oTexture2D->GetSize(), fRotation);
 	}
 }

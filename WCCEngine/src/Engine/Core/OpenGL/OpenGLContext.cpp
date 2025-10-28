@@ -15,8 +15,8 @@ namespace WCCEngine
 
 	const bool OpenGLContext::InitializeOpenGLContext()
 	{
-		const int isGLFWInitialized = glfwInit();
-		WCC_ASSERT(isGLFWInitialized);
+		const int nIsGLFWInitialized = glfwInit();
+		WCC_ASSERT(nIsGLFWInitialized);
 		
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);

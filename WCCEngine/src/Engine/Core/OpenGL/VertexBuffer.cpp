@@ -1,8 +1,6 @@
 #include "wccpch.h"
 #include "VertexBuffer.h"
 
-#define BUFFER_LAYOUT_COUNTER_DEFAULT_VALUE 0
-
 namespace WCCEngine
 {
 	VertexBuffer::VertexBufferLayout::VertexBufferLayout(unsigned int nIndex, std::size_t nnStrideSize, int nComponentSize /*= FOUR_COMPONENT_SIZE*/,
@@ -21,6 +19,13 @@ namespace WCCEngine
 	{
 	}
 
+
+	void VertexBuffer::VertexBufferLayout::Generate()
+	{
+		glVertexAttribPointer(m_nIndex, m_nComponentSize, m_eComponentType, m_bNormalized, m_nnStrideSize, m_pCurrentStideOffset);
+		glEnableVertexAttribArray(m_nIndex);
+	}
+
 	void VertexBuffer::VertexBufferLayout::Bind() const
 	{
 	}
@@ -29,14 +34,12 @@ namespace WCCEngine
 	{
 	}
 
-	void VertexBuffer::VertexBufferLayout::Generate()
+	void VertexBuffer::VertexBufferLayout::Destroy()
 	{
-		glVertexAttribPointer(m_nIndex, m_nComponentSize, m_eComponentType, m_bNormalized, m_nnStrideSize, m_pCurrentStideOffset);
-		glEnableVertexAttribArray(m_nIndex);
 	}
 
 	VertexBuffer::VertexBuffer()
-		: m_nBufferLayoutCounter(BUFFER_LAYOUT_COUNTER_DEFAULT_VALUE)
+		: m_nBufferLayoutCounter(0)
 	{
 		Generate();
 		Bind();
@@ -44,7 +47,12 @@ namespace WCCEngine
 
 	VertexBuffer::~VertexBuffer()
 	{
-		m_oVertexBufferLayoutArray.clear();
+		Destroy();
+	}
+
+	void VertexBuffer::Generate()
+	{
+		glGenBuffers(1, &m_nObjectID);
 	}
 
 	void VertexBuffer::Bind() const
@@ -57,12 +65,13 @@ namespace WCCEngine
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	void VertexBuffer::Generate()
+	void VertexBuffer::Destroy()
 	{
-		glGenBuffers(1, &m_nObjectID);
+		m_oVertexBufferLayoutArray.clear();
 	}
 
-	void VertexBuffer::AddLayout(std::size_t nnStrideSize, int nComponentSize /*= FOUR_COMPONENT_SIZE*/, GLenum eComponentType /*= GL_FLOAT*/, GLboolean bNormalized /*= GL_FALSE*/, const void* pCurrentStideOffset /*= (void*)0*/)
+	void VertexBuffer::AddLayout(IN const std::size_t nnStrideSize, OPTIONAL const  int nComponentSize /*= FOUR_COMPONENT_SIZE*/, OPTIONAL const GLenum eComponentType /*= GL_FLOAT*/,
+		OPTIONAL const GLboolean bNormalized /*= GL_FALSE*/, const void* pCurrentStideOffset/* = (void*)0*/)
 	{
 		const auto oBufferLayout = CreateRef<VertexBufferLayout>(m_nBufferLayoutCounter++, nnStrideSize, nComponentSize, eComponentType, bNormalized, pCurrentStideOffset);
 		m_oVertexBufferLayoutArray.push_back(oBufferLayout);

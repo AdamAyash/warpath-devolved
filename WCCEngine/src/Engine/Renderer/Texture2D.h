@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Core//OpenGL/OpenGLObject.h"
+#include "glm.hpp"
 
 namespace WCCEngine
 {
@@ -14,9 +15,11 @@ namespace WCCEngine
 		virtual void Generate();
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
+		virtual void Destroy() override;
 
 		constexpr inline unsigned int GetWidth() const;
 		constexpr inline unsigned int GetHeight() const;
+		constexpr inline glm::vec2 GetSize() const;
 
 	private:
 		unsigned int m_nWidth;

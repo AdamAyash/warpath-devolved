@@ -15,6 +15,6 @@ namespace WCCEngine
 		void DisplayOpenGLContextInfo();
 
 	private:
-		const bool CheckIfClientSupportsOpenGLVersion4() const;
+		const inline bool CheckIfClientSupportsOpenGLVersion4() const;
 	};
 };

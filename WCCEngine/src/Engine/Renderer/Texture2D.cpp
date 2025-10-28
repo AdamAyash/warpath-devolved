@@ -13,6 +13,7 @@ namespace WCCEngine
 
 	Texture2D::~Texture2D()
 	{
+		Destroy();
 	}
 
 	void Texture2D::Generate()
@@ -36,6 +37,10 @@ namespace WCCEngine
 	{
 	}
 
+	void Texture2D::Destroy()
+	{
+	}
+
 	constexpr inline unsigned int Texture2D::GetWidth() const
 	{
 		return m_nWidth;
@@ -44,5 +49,10 @@ namespace WCCEngine
 	constexpr inline unsigned int Texture2D::GetHeight() const
 	{
 		return m_nHeight;
+	}
+
+	constexpr inline glm::vec2 Texture2D::GetSize() const
+	{
+		return glm::vec2(GetWidth(), GetHeight());
 	}
 }
