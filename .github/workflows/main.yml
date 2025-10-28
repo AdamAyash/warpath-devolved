@@ -10,6 +10,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+       - name: Update submodules
+         run: git submodule update --init --recursive
+         
       - name: Installing premake5
         uses: Jarod42/install-premake5@v6
 
