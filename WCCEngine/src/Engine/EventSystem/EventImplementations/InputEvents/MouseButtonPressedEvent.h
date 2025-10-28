@@ -2,7 +2,7 @@
 
 #include "../../EventSystem.h"
 #include "MouseButtonEvent.h"
-#include "../../../Core/MouseCodes.h"
+#include "../../../Input/MouseCodes.h"
 
 namespace WCCEngine
 {

@@ -3,7 +3,7 @@
 #include "../Core/GameTime.h"
 #include "../Renderer/Texture2D.h"
 #include "../Renderer/Renderer2D.h"
-#include "../Core/UIDGenerator.h"
+#include "../Common/UIDGenerator.h"
 
 namespace WCCEngine
 {
