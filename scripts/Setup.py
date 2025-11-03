@@ -1,13 +1,9 @@
-import PlatformDetection
-import WindowsSetup
-import LinuxSetup
+from python_requirements import validate_python_requirements
+from premake_requirements import validate_premake_requirements
+from utils import section, success
 
-print("WCC Engine setup is starting.")
-platform = PlatformDetection.getCurrentPlatform()
+validate_python_requirements()
+validate_premake_requirements()
 
-if(platform == PlatformDetection.Platform.Windows):
-    WindowsSetup.startWindowsSetup()
-elif(platform == PlatformDetection.Platform.Linux):
-    LinuxSetup.startLinuxSetup()
-else:
-    print("Unsuported platform.")
+section("Warpath-Devolved setup is starting...")
+success("Setup completed successfully!")
