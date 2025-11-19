@@ -12,7 +12,7 @@ namespace WCCEngine
 		, m_bNormalized(bNormalized)
 		, m_pCurrentStideOffset(pCurrentStideOffset)
 	{
-		Generate();
+		Create();
 	}
 
 	VertexBuffer::VertexBufferLayout::~VertexBufferLayout()
@@ -20,7 +20,7 @@ namespace WCCEngine
 	}
 
 
-	void VertexBuffer::VertexBufferLayout::Generate()
+	void VertexBuffer::VertexBufferLayout::Create()
 	{
 		glVertexAttribPointer(m_nIndex, m_nComponentSize, m_eComponentType, m_bNormalized, m_nnStrideSize, m_pCurrentStideOffset);
 		glEnableVertexAttribArray(m_nIndex);
@@ -41,7 +41,7 @@ namespace WCCEngine
 	VertexBuffer::VertexBuffer()
 		: m_nBufferLayoutCounter(0)
 	{
-		Generate();
+		Create();
 		Bind();
 	}
 
@@ -50,7 +50,7 @@ namespace WCCEngine
 		Destroy();
 	}
 
-	void VertexBuffer::Generate()
+	void VertexBuffer::Create()
 	{
 		glGenBuffers(1, &m_nObjectID);
 	}
@@ -73,7 +73,7 @@ namespace WCCEngine
 	void VertexBuffer::AddLayout(IN const std::size_t nnStrideSize, OPTIONAL const  int nComponentSize /*= FOUR_COMPONENT_SIZE*/, OPTIONAL const GLenum eComponentType /*= GL_FLOAT*/,
 		OPTIONAL const GLboolean bNormalized /*= GL_FALSE*/, const void* pCurrentStideOffset/* = (void*)0*/)
 	{
-		const auto oBufferLayout = CreateRef<VertexBufferLayout>(m_nBufferLayoutCounter++, nnStrideSize, nComponentSize, eComponentType, bNormalized, pCurrentStideOffset);
-		m_oVertexBufferLayoutArray.push_back(oBufferLayout);
+		const auto pBufferLayout = CreateRef<VertexBufferLayout>(m_nBufferLayoutCounter++, nnStrideSize, nComponentSize, eComponentType, bNormalized, pCurrentStideOffset);
+		m_oVertexBufferLayoutArray.push_back(pBufferLayout);
 	}
 }

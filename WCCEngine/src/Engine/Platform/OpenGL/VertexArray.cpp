@@ -5,7 +5,7 @@ namespace WCCEngine
 {
 	VertexArray::VertexArray()
 	{
-		Generate();
+		Create();
 		Bind();
 	}
 
@@ -14,7 +14,7 @@ namespace WCCEngine
 		Destroy();
 	}
 
-	void VertexArray::Generate()
+	void VertexArray::Create()
 	{
 		glGenVertexArrays(1, &m_nObjectID);
 	}

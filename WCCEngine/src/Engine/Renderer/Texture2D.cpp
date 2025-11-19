@@ -3,12 +3,19 @@
 
 namespace WCCEngine
 {
+	Texture2D::Texture2D()
+		: m_nWidth(0)
+		, m_nHeight(0)
+		, m_pTextureData(nullptr)
+	{
+	}
+
 	Texture2D::Texture2D(IN unsigned int nWidth, IN unsigned int nHeight, const PBYTE pTextureData)
 		: m_nWidth(nWidth)
 		, m_nHeight(nHeight)
 		, m_pTextureData(pTextureData)
 	{
-		Generate();
+		Create();
 	}
 
 	Texture2D::~Texture2D()
@@ -16,7 +23,7 @@ namespace WCCEngine
 		Destroy();
 	}
 
-	void Texture2D::Generate()
+	void Texture2D::Create()
 	{
 		glGenTextures(1, &this->m_nObjectID);
 		Bind();

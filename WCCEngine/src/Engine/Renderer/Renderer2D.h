@@ -1,37 +1,67 @@
 #pragma once
 #include "../Core/Core.h"
-#include "Texture2D.h"
-#include "../Core/OpenGL/VertexArray.h"
 #include "glm.hpp"
+#include "../Platform/OpenGL/VertexArray.h"
+#include "Texture2D.h"
 #include "Shader/Shader.h"
 #include "../Core/Application/Window.h"
 
 namespace WCCEngine
 {
-	class WCC_API Renderer2D
+	struct Vertex
+	{
+		Vertex()
+			: oPosition(0)
+			, oTextureCoordinates(0)
+			, oColor(0)
+		{
+			WCCSecureZeroMemory;
+		}
+
+	public:
+		glm::vec4 oPosition;
+		glm::vec2 oTextureCoordinates;
+		glm::vec4 oColor;
+	};
+
+	class Renderer2D final
 	{
 	public:
-		Renderer2D(IN const WindowProperties& oWindowProperties);
+		Renderer2D(const WindowProperties& oWindowsProperties);
 		~Renderer2D();
 
 	public:
-		void RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2 oSize = glm::vec2(),
-			OPTIONAL float fRotation = 0.0f, OPTIONAL glm::vec3 oColor = glm::vec3(1.0f));
+		void BeginBatch();
+		void EndBatch();
 
-		void ClearBackgroundColor();
-		void SetBackgroundColor(IN const glm::vec4& oBackgroundColor);
+		void Flush();
+		void ShutDown();
+
+		void DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition);
 
 	private:
-		const bool Initialize();
+		void Initialize();
 
 		const glm::mat4 CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize,
-			IN const float fRotation, IN const glm::vec3& oColor);
+			IN const float fRotation);
 
 	private:
-		const WindowProperties& m_oWindowProperties;
-		Scope<VertexArray> m_pVertexArray;
+		static const long s_nMaxVertexCount = 10000;
+
+		int m_nMaxSupportedTextures;
+		long m_lVerticesCount;
+		long m_TrianglesCount;
+
+		Vertex* m_pVertexDataBase;
+		Vertex* m_pVertexDataCurrent;
+
+		glm::vec2 m_oQuadVertexPositions[6];
+		std::vector<Ref<Texture2D>> m_oTextureSlots;
+
+		Ref<VertexBuffer> m_pVertexBuffer;
+		Ref<VertexArray> m_pVertexArray;       
 		Ref<Shader> m_oTexture2DShader;
-		Ref<Shader> m_oLine2DShader;
-		glm::vec4 m_oBackgroundColor;
+
+		WindowProperties m_oWindowProperties;
 	};
 }

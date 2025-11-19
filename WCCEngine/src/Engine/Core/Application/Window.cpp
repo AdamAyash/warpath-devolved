@@ -1,7 +1,7 @@
 #include "wccpch.h"
 #include "Window.h"
 #include <iostream>
-#include "../OpenGL/OpenGLContext.h"
+#include "../../Platform/OpenGL/OpenGLContext.h"
 #include "../../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
 #include "../../EventSystem/EventImplementations/InputEvents/MouseButtonPressedEvent.h"
 #include "../../EventSystem/EventImplementations/WindowEvents/WindowResizeEvent.h"

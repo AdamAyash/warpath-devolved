@@ -1,13 +1,13 @@
 #version 460 core
-layout (location = 0) in vec4 oVertex;
+layout (location = 0) in vec2 oPosition;
+layout (location = 1) in vec2 oTextureCoordinates;
 
-out vec2 oTexureCoordinates;
+out vec2 oTextureCoordinatesOut;
 
-uniform mat4 oModelMatrix;
-uniform mat4 oProjectionMatrix;
+uniform mat4 oProjectionMaxtrix;
 
 void main()
 {
-    oTexureCoordinates = oVertex.zw;
-    gl_Position = oProjectionMatrix * oModelMatrix * vec4(oVertex.xy, 0.0, 1.0);
+    gl_Position = oProjectionMaxtrix * vec4(oPosition.xy, 0.0, 1.0);
+    oTextureCoordinatesOut = oTextureCoordinates;
 }

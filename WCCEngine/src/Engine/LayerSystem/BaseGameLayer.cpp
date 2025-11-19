@@ -44,7 +44,7 @@ namespace WCCEngine
 
 	void BaseGameLayer::Render(IN Ref<Renderer2D> pRenderer)
 	{
-		pRenderer->ClearBackgroundColor();
+		/*pRenderer->ClearBackgroundColor();*/
 
 		for (int nIndex = 0; nIndex < m_oGameObjectArray.GetLenght(); ++nIndex)
 		{

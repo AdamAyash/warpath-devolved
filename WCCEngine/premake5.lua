@@ -35,7 +35,6 @@ project "WCCEngine"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.GLM}",
-        "%{IncludeDir.ImGUI}",
         "vendor/GLM/glm/**.hpp",
 		"vendor/GLM/glm/**.inl",
     }
@@ -44,8 +43,7 @@ project "WCCEngine"
     {
         "GLFW",
         "Glad",
-        "opengl32.lib",
-        "ImGUI"
+        "opengl32.lib"
     }
 
     filter "system:windows"

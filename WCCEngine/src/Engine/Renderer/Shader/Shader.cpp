@@ -5,7 +5,6 @@
 #include "glm.hpp"
 #include <gtc/type_ptr.hpp>
 
-
 #define SHADER_COMPILATION_INFO_BUFFER_SIZE 512
 
 namespace WCCEngine
@@ -28,7 +27,7 @@ namespace WCCEngine
 		Destroy();
 	}
 
-	void Shader::Generate()
+	void Shader::Create()
 	{
 	}
 

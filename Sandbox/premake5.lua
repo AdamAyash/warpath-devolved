@@ -1,7 +1,7 @@
 project "Sandbox"
     kind "ConsoleApp"
     language "C++"
-    staticruntime "off"
+    staticruntime "on"
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -21,19 +21,19 @@ project "Sandbox"
 
     includedirs
     {
+        "%{IncludeDir.ImGUI}",
         "%{wks.location}/WCCEngine/vendor/spdlog/include",
         "%{wks.location}/WCCEngine/src",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.GLM}",
-        "%{IncludeDir.ImGUI}",
         "vendor/GLM/glm/**.hpp",
 		"vendor/GLM/glm/**.inl",
     }
 
     links
     {
-        "WCCEngine",
+        "WCCEngine"
     }
 
     filter "system:windows"

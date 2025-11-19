@@ -1,15 +1,17 @@
 #include "wccpch.h"
 #include "Renderer2D.h"
-#include "glad/glad.h"
-#include "../Core/OpenGL/VertexBuffer.h" 
-#include <gtc/matrix_transform.hpp>
-#include "../Common/Utilities.h"
+#include <ext/matrix_transform.hpp>
+#include <ext/matrix_clip_space.hpp>
 
 namespace WCCEngine
 {
-	Renderer2D::Renderer2D(IN const WindowProperties& oWindowProperties)
-		: m_oWindowProperties(oWindowProperties)
-		, m_oBackgroundColor(0)
+	Renderer2D::Renderer2D(const WindowProperties& oWindowsProperties)
+		: m_pVertexDataBase(nullptr)
+		, m_pVertexDataCurrent(nullptr)
+		, m_lVerticesCount(0)
+		, m_TrianglesCount(0)
+		, m_nMaxSupportedTextures(0)
+		, m_oWindowProperties(oWindowsProperties)
 	{
 		Initialize();
 	}
@@ -18,83 +20,109 @@ namespace WCCEngine
 	{
 	}
 
-	void Renderer2D::RenderTexture(IN const Ref<Texture2D>& oTexture, IN const glm::vec2& oPosition, OPTIONAL const glm::vec2 oSize /*= vec2()*/, 
-		OPTIONAL float fRotation /*= 0*/, OPTIONAL glm::vec3 oColor /* = glm::vec3(1.f)*/)
+	void Renderer2D::BeginBatch()
 	{
-		auto oModelMatrix = CreateModelMatrix(oPosition, oSize, fRotation, oColor);
+		m_lVerticesCount = 0;
+		m_TrianglesCount = 0;
+		m_pVertexDataCurrent = m_pVertexDataBase;
+	}
 
+	void Renderer2D::EndBatch()
+	{
+		Flush();
+	}
+
+	void Renderer2D::Flush()
+	{
 		m_oTexture2DShader->Bind();
-		m_oTexture2DShader->SetMatrix("oModelMatrix", oModelMatrix);
-		m_oTexture2DShader->SetVector3("oColor", oColor);
+		
+		const uint32_t nDataSize = (uint32_t)((uint8_t*)m_pVertexDataCurrent - (uint8_t*)m_pVertexDataBase);
 
-		glActiveTexture(GL_TEXTURE0);
-		oTexture->Bind();
-
-		m_pVertexArray->Bind();
-
-		const auto nTextureQuadVertecesCount = 6;
-		glDrawArrays(GL_TRIANGLES, 0, nTextureQuadVertecesCount);
+		m_pVertexBuffer->SetData(m_pVertexDataBase, nDataSize);
+		glDrawArrays(GL_TRIANGLES, 0, m_lVerticesCount);
 	}
 
-	void Renderer2D::SetBackgroundColor(IN const glm::vec4& oBackgroundColor)
+	void Renderer2D::ShutDown()
 	{
-		m_oBackgroundColor = oBackgroundColor;
+		delete[] m_pVertexDataBase;
 	}
 
-	const bool Renderer2D::Initialize()
+	void Renderer2D::DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition)
 	{
+		WCC_ASSERT(m_pVertexDataCurrent);
+
+		if (m_lVerticesCount >= s_nMaxVertexCount)
+		{
+			Flush();
+			BeginBatch();
+		}
+
+		constexpr glm::vec2 oTextureCoordinates[] = 
+		{ 
+			{ 0.0f, 1.0f }, 
+			{ 1.0f, 0.0f }, 
+			{ 0.0f, 0.0f },
+			{ 0.0f, 1.0f }, 
+			{ 1.0f, 1.0f }, 
+			{ 1.0f, 0.0f }
+		};
+		 
+		const glm::vec2 oSize = glm::vec2(32, 32);
+
+		const auto oModelMatrix = CreateModelMatrix(oPosition, oSize, 0);
+
+		const auto nQuadVertexCount = 6;
+
+		for (auto nIndex = 0; nIndex < nQuadVertexCount; ++nIndex)
+		{
+			m_pVertexDataCurrent->oPosition = oModelMatrix * glm::vec4(m_oQuadVertexPositions[nIndex], 0, 1);
+			m_pVertexDataCurrent->oTextureCoordinates = oTextureCoordinates[nIndex];
+			m_pVertexDataCurrent++;
+		}
+
+		m_lVerticesCount += nQuadVertexCount;
+	}
+
+	void Renderer2D::Initialize()
+	{
+		WCC_ASSERT(!m_pVertexDataBase);
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-		float oVertices[] = 
-		{
-			// pos      // tex
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 0.0f,
+		m_pVertexDataBase = new Vertex[s_nMaxVertexCount];
 
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f
-		};
+		m_pVertexArray = CreateRef<VertexArray>();
+		m_pVertexBuffer = CreateRef<VertexBuffer>();
 
-		m_pVertexArray = CreateScope<VertexArray>();
+		m_pVertexArray->AddVertexBuffer(m_pVertexBuffer);
 
-		const auto nTextureVertexBufferSize = 24;
-		const auto nTextureVertexBufferLayoutOffset = 4;
+		m_pVertexBuffer->Allocate(s_nMaxVertexCount * sizeof(Vertex)); // TODO Should it be template like sizeof(Vertex) to get from template
+		m_pVertexBuffer->AddLayout(sizeof(Vertex), 2, GL_FLOAT, GL_FALSE, (const void*)offsetof(Vertex, oPosition));
+		m_pVertexBuffer->AddLayout(sizeof(Vertex), 2, GL_FLOAT, GL_FALSE, (const void*)offsetof(Vertex, oTextureCoordinates));
 
-		VertexBuffer oVertexBuffer;
-		oVertexBuffer.Pack<float[nTextureVertexBufferSize]>(oVertices, GL_STATIC_DRAW);
-		oVertexBuffer.AddLayout(nTextureVertexBufferLayoutOffset * sizeof(float));
+		m_oQuadVertexPositions[0] = { 0.0f, 1.0f };
+		m_oQuadVertexPositions[1] = { 1.0f, 0.0f };
+		m_oQuadVertexPositions[2] = { 0.0f, 0.0f };
+		m_oQuadVertexPositions[3] = { 0.0f, 1.0f };
+		m_oQuadVertexPositions[4] = { 1.0f, 1.0f };
+		m_oQuadVertexPositions[5] = { 1.0f, 0.0f };
 
-		m_oLine2DShader = CreateRef<Shader>("assets/shaders/ExampleLineVertexShader.glsl"
-			, "assets/shaders/ExampleLineFragmentShader.glsl"
-			, "Default line shader");
-
-		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl"
-			,"assets/shaders/ExampleFragmentShader.glsl"
-			, "Default texture shader");
-
-		m_oTexture2DShader->Bind();
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &m_nMaxSupportedTextures);
 
 		glm::mat4 oProjectionMatrix = glm::ortho(0.0f, static_cast<float>(m_oWindowProperties.m_nWidth),
 			static_cast<float>(m_oWindowProperties.m_nHeight), 0.0f, -1.0f, 1.0f);
 
-		m_oTexture2DShader->SetMatrix("oProjectionMatrix", oProjectionMatrix);
-		m_oTexture2DShader->SetInteger("oTexture0", 0);
+		m_oTexture2DShader = CreateRef<Shader>("assets/shaders/ExampleVertexShader.glsl"
+			, "assets/shaders/ExampleFragmentShader.glsl"
+			, "Default texture shader");
 
-		WCC_CORE_INFO("Renderer initialized successfully.");
-		return true;
+		m_oTexture2DShader->SetMatrix("oProjectionMaxtrix", oProjectionMatrix, true);
+
+		WCC_CORE_INFO("Renderer was initialized successfully.");
 	}
 
-	void Renderer2D::ClearBackgroundColor()
-	{
-		glClearColor(m_oBackgroundColor.x, m_oBackgroundColor.y, m_oBackgroundColor.z, m_oBackgroundColor.w);
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-
-	const glm::mat4 Renderer2D::CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize,
-		IN const float fRotation, IN const glm::vec3& oColor)
+	const glm::mat4 Renderer2D::CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize, IN const float fRotation)
 	{
 		const auto fTextureCenterOffset = 0.5f;
 

@@ -10,8 +10,4 @@ namespace WCCEngine
 	ILayer::~ILayer()
 	{
 	}
-
-	void ILayer::OnImGuiRender()
-	{
-	}
 }

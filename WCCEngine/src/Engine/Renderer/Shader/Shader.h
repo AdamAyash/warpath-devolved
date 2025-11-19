@@ -1,6 +1,6 @@
 #pragma once
 #include "string"
-#include "../../Core/OpenGL/OpenGLObject.h"
+#include "../../Platform/OpenGL/OpenGLObject.h"
 #include "GLFW/glfw3.h"
 #include "../../Core/Core.h"
 #include "fwd.hpp"
@@ -16,7 +16,7 @@ namespace WCCEngine
 		~Shader();
 
 	public:
-		virtual void Generate() override;
+		virtual void Create() override;
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 		virtual void Destroy() override;

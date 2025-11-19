@@ -1,6 +1,7 @@
 
 #include "wccpch.h"
 #include "Application.h"
+#include "../../Renderer/RenderCommand.h"
 
 namespace WCCEngine
 {
@@ -17,6 +18,7 @@ namespace WCCEngine
 
 	Application::~Application()
 	{
+		m_pRenderer->ShutDown();
 	}
 
 	void Application::Run()
@@ -56,13 +58,11 @@ namespace WCCEngine
 		WCCEngine::Logger::Init();
 
 		WindowProperties oWindowProperties;
+
 		m_pWindow = CreateScope<Window>(oWindowProperties);
 		m_pRenderer = CreateRef<Renderer2D>(oWindowProperties);
 		m_pLayerStack = CreateScope<LayerStack>();
 		m_pGameTime = CreateScope<GameTime>();
-		m_pImGUILayer = new ImGUILayer();
-
-		PushLayerOverlay(m_pImGUILayer);
 
 		m_pWindow->SetEventListener(*this);
 	}
@@ -126,18 +126,18 @@ namespace WCCEngine
 	{
 		if (!m_bIsMinimized)
 		{
-			m_pImGUILayer->Begin();
-			{
-				for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
-				{
-					ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
-					WCC_ASSERT(pLayer);
+			RenderCommand::Clear();
+			pRenderer->BeginBatch();
 
-					pLayer->Render(pRenderer);
-					pLayer->OnImGuiRender();
-				}
+			for (auto nIndex = 0; nIndex < m_pLayerStack->GetLenght(); ++nIndex)
+			{
+				ILayer* const pLayer = m_pLayerStack->GetAt(nIndex);
+				WCC_ASSERT(pLayer);
+
+				pLayer->Render(pRenderer);
 			}
-			m_pImGUILayer->End();
+
+			pRenderer->EndBatch();
 		}
 	}
 

@@ -2,7 +2,7 @@
 #include "map"
 #include <string>
 #include "../Core/Core.h"
-#include "../Core/OpenGL/OpenGLObject.h"
+#include "../Platform/OpenGL/OpenGLObject.h"
 #include "../Renderer/Texture2D.h"
 
 namespace WCCEngine

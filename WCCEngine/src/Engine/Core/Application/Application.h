@@ -8,7 +8,6 @@
 #include "../../EventSystem/EventImplementations/WindowEvents/WindowCloseEvent.h"
 #include "../../EventSystem/EventImplementations/WindowEvents/WindowResizeEvent.h"
 #include "../../LayerSystem/LayerStack.h"
-#include "../../ImGUIImplementation/ImGUILayer.h"
 
 namespace WCCEngine
 {
@@ -21,7 +20,6 @@ namespace WCCEngine
 
 	public:
 		void Run();
-		void ShutDown();
 		Window& GetWindow() const;
 
 		static Application* GetInstance();
@@ -40,6 +38,8 @@ namespace WCCEngine
 		bool OnWindowClose(const WindowCloseEvent& oEvent);
 		bool OnWindowResize(const WindowResizeEvent& oEvent);
 
+		void ShutDown();
+
 	private:
 		bool m_bIsRunning;
 		bool m_bIsMinimized;
@@ -48,8 +48,6 @@ namespace WCCEngine
 		Scope<LayerStack> m_pLayerStack;
 		Scope<GameTime> m_pGameTime;
 		Ref<Renderer2D> m_pRenderer;
-
-		ImGUILayer* m_pImGUILayer;
 
 		static Application* m_pApplicationInstance;
 		static std::mutex m_oMutex;

@@ -1,6 +1,5 @@
 #include "ExampleBaseGameLayer.h"
 #include "Engine/Common/RandomNumberGenerator.h"
-#include <imgui.h>
 
 ExampleBaseGameLayer::ExampleBaseGameLayer()
 	: m_pExampleGameObject(nullptr)
@@ -22,7 +21,7 @@ void ExampleBaseGameLayer::LoadContent()
 	m_pExampleGameObject->oTargetPosition = glm::vec2(200, 200);
 
 	WCCEngine::RandomNumberGenerator oRandomNumberGenerator;
-	for (int nInex = 0; nInex < 1000; ++nInex)
+	for (int nInex = 0; nInex < 10000; ++nInex)
 	{
 		const UINT nRandomPositionX = oRandomNumberGenerator.GetNextUnsignedInt(0, 1600);
 		const UINT nRandomPositionY = oRandomNumberGenerator.GetNextUnsignedInt(0, 900);
@@ -42,12 +41,6 @@ void ExampleBaseGameLayer::OnEvent(IN WCCEngine::BaseEvent& oEvent)
 {
 	WCCEngine::EventDispatcher oEventDispatcher(oEvent);
 	oEventDispatcher.Dispatch<WCCEngine::MouseButtonPressedEvent>(WCC_BIND_EVENT(ExampleBaseGameLayer::OnMouseButtonPressedEvent));
-}
-
-void ExampleBaseGameLayer::OnImGuiRender()
-{
-	/*ImGui::Begin("Settings");
-	ImGui::End();*/
 }
 
 void ExampleBaseGameLayer::Render(IN WCCEngine::Ref<WCCEngine::Renderer2D> pRenderer)

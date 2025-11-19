@@ -1,6 +1,7 @@
 #pragma once
 #include "OpenGLObject.h"
-#include "../Core.h"
+#include "../../Core/Core.h"
+#include "OpenGLTypes.h"
 
 #define FOUR_COMPONENT_SIZE 4
 
@@ -17,7 +18,7 @@ namespace WCCEngine
 			~VertexBufferLayout();
 
 		public:
-			virtual void Generate() override;
+			virtual void Create() override;
 			virtual void Bind() const override;
 			virtual void UnBind() const override;
 			virtual void Destroy() override;
@@ -36,7 +37,7 @@ namespace WCCEngine
 		~VertexBuffer();
 
 	public:
-		virtual void Generate() override; 
+		virtual void Create() override; 
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 		virtual void Destroy() override;
@@ -45,9 +46,21 @@ namespace WCCEngine
 			OPTIONAL const GLboolean bNormalized = GL_FALSE, const void* pCurrentStideOffset = (void*)0);
 
 		template<class DataType>
-		void Pack(IN DataType& pData, IN const GLenum usage)
+		void Pack(IN DataType& pData, IN const OpenGLDrawTypes eDrawType)
 		{
-			glBufferData(GL_ARRAY_BUFFER, sizeof(pData), pData, usage);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(pData), pData, static_cast<GLenum>(eDrawType));
+		}
+
+		void SetData(const void* pData, uint32_t nSize)
+		{
+			Bind();
+			glBindBuffer(GL_ARRAY_BUFFER, m_nObjectID);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, nSize, pData);
+		}
+
+		void Allocate(IN const size_t nBufferSize, OPTIONAL const OpenGLDrawTypes eDrawType = OpenGLDrawTypes::DrawTypeDynamic)
+		{
+			glBufferData(GL_ARRAY_BUFFER, nBufferSize, nullptr, static_cast<GLenum>(eDrawType));
 		}
 
 	private:
