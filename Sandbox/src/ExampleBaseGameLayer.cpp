@@ -21,7 +21,7 @@ void ExampleBaseGameLayer::LoadContent()
 	m_pExampleGameObject->oTargetPosition = glm::vec2(200, 200);
 
 	WCCEngine::RandomNumberGenerator oRandomNumberGenerator;
-	for (int nInex = 0; nInex < 10000; ++nInex)
+	for (int nInex = 0; nInex < 10; ++nInex)
 	{
 		const UINT nRandomPositionX = oRandomNumberGenerator.GetNextUnsignedInt(0, 1600);
 		const UINT nRandomPositionY = oRandomNumberGenerator.GetNextUnsignedInt(0, 900);

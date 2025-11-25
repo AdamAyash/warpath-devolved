@@ -35,8 +35,6 @@ namespace WCCEngine
 		void EndBatch();
 
 		void Flush();
-		void ShutDown();
-
 		void DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition);
 
 	private:
@@ -45,8 +43,10 @@ namespace WCCEngine
 		const glm::mat4 CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize,
 			IN const float fRotation);
 
+		void ShutDown();
+
 	private:
-		static const long s_nMaxVertexCount = 10000;
+		static const long s_nMaxVertexCount = 50;
 
 		int m_nMaxSupportedTextures;
 		long m_lVerticesCount;

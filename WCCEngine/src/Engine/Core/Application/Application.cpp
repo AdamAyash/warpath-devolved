@@ -18,7 +18,6 @@ namespace WCCEngine
 
 	Application::~Application()
 	{
-		m_pRenderer->ShutDown();
 	}
 
 	void Application::Run()

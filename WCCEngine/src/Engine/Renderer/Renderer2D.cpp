@@ -18,6 +18,7 @@ namespace WCCEngine
 
 	Renderer2D::~Renderer2D()
 	{
+		ShutDown();
 	}
 
 	void Renderer2D::BeginBatch()
@@ -45,13 +46,15 @@ namespace WCCEngine
 	void Renderer2D::ShutDown()
 	{
 		delete[] m_pVertexDataBase;
+		m_pVertexDataBase = nullptr;
 	}
 
 	void Renderer2D::DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition)
 	{
 		WCC_ASSERT(m_pVertexDataCurrent);
 
-		if (m_lVerticesCount >= s_nMaxVertexCount)
+		const auto nQuadVertexCount = 6;
+		if (m_lVerticesCount >= s_nMaxVertexCount - nQuadVertexCount)
 		{
 			Flush();
 			BeginBatch();
@@ -70,8 +73,6 @@ namespace WCCEngine
 		const glm::vec2 oSize = glm::vec2(32, 32);
 
 		const auto oModelMatrix = CreateModelMatrix(oPosition, oSize, 0);
-
-		const auto nQuadVertexCount = 6;
 
 		for (auto nIndex = 0; nIndex < nQuadVertexCount; ++nIndex)
 		{
