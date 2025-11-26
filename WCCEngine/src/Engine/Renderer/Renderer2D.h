@@ -33,20 +33,19 @@ namespace WCCEngine
 	public:
 		void BeginBatch();
 		void EndBatch();
-
 		void Flush();
 		void DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition);
 
 	private:
 		void Initialize();
-
 		const glm::mat4 CreateModelMatrix(IN const glm::vec2& oPosition, IN const glm::vec2& oSize,
 			IN const float fRotation);
-
+		void NextBatch();
 		void ShutDown();
 
 	private:
-		static const long s_nMaxVertexCount = 50;
+		static const long s_lMaxVertexCount = 50;
+		static const long s_lMaxTexture2DSlots = 32;
 
 		int m_nMaxSupportedTextures;
 		long m_lVerticesCount;
@@ -61,6 +60,8 @@ namespace WCCEngine
 		Ref<VertexBuffer> m_pVertexBuffer;
 		Ref<VertexArray> m_pVertexArray;       
 		Ref<Shader> m_oTexture2DShader;
+
+		std::vector<Ref<Texture2D>> m_oTexture2DSlots;
 
 		WindowProperties m_oWindowProperties;
 	};

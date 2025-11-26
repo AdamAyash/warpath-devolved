@@ -43,21 +43,34 @@ namespace WCCEngine
 		glDrawArrays(GL_TRIANGLES, 0, m_lVerticesCount);
 	}
 
-	void Renderer2D::ShutDown()
-	{
-		delete[] m_pVertexDataBase;
-		m_pVertexDataBase = nullptr;
-	}
-
 	void Renderer2D::DrawQuad(IN const Ref<Texture2D> pTexture, IN const glm::vec2 oPosition)
 	{
 		WCC_ASSERT(m_pVertexDataCurrent);
 
 		const auto nQuadVertexCount = 6;
-		if (m_lVerticesCount >= s_nMaxVertexCount - nQuadVertexCount)
+		if (m_lVerticesCount >= s_lMaxVertexCount - nQuadVertexCount)
+			NextBatch();
+
+		long lTextureSlotIndex = -1;
+
+		const size_t nCurrentTextureSlots = m_oTexture2DSlots.size();
+		for(size_t nnIndex = 0; nnIndex < nCurrentTextureSlots; ++nnIndex)
 		{
-			Flush();
-			BeginBatch();
+			const Ref<Texture2D> pCurrentTexture2D = m_oTexture2DSlots.at(nnIndex);
+			if (!pCurrentTexture2D)
+			{
+				WCC_CORE_ERROR(NULL_POINTER_EXCEPTION_MESSAGE, __FUNCTION__);
+				continue;
+			}
+
+			if (pCurrentTexture2D == pTexture)
+				lTextureSlotIndex = nnIndex;
+		}
+
+		if (lTextureSlotIndex == -1 && nCurrentTextureSlots < s_lMaxTexture2DSlots)
+		{
+			m_oTexture2DSlots.push_back(pTexture);
+			lTextureSlotIndex = nCurrentTextureSlots + 1;
 		}
 
 		constexpr glm::vec2 oTextureCoordinates[] = 
@@ -91,14 +104,14 @@ namespace WCCEngine
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-		m_pVertexDataBase = new Vertex[s_nMaxVertexCount];
+		m_pVertexDataBase = new Vertex[s_lMaxVertexCount];
 
 		m_pVertexArray = CreateRef<VertexArray>();
 		m_pVertexBuffer = CreateRef<VertexBuffer>();
 
 		m_pVertexArray->AddVertexBuffer(m_pVertexBuffer);
 
-		m_pVertexBuffer->Allocate(s_nMaxVertexCount * sizeof(Vertex)); // TODO Should it be template like sizeof(Vertex) to get from template
+		m_pVertexBuffer->Allocate(s_lMaxVertexCount * sizeof(Vertex)); // TODO Should it be template like sizeof(Vertex) to get from template
 		m_pVertexBuffer->AddLayout(sizeof(Vertex), 2, GL_FLOAT, GL_FALSE, (const void*)offsetof(Vertex, oPosition));
 		m_pVertexBuffer->AddLayout(sizeof(Vertex), 2, GL_FLOAT, GL_FALSE, (const void*)offsetof(Vertex, oTextureCoordinates));
 
@@ -135,5 +148,17 @@ namespace WCCEngine
 		oModelMatrix = glm::scale(oModelMatrix, glm::vec3(oSize, 1.f));
 
 		return oModelMatrix;
+	}
+
+	void Renderer2D::NextBatch()
+	{
+		Flush();
+		BeginBatch();
+	}
+
+	void Renderer2D::ShutDown()
+	{
+		delete[] m_pVertexDataBase;
+		m_pVertexDataBase = nullptr;
 	}
 }

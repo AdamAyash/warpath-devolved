@@ -13,6 +13,15 @@ namespace WCCEngine
 		virtual ~OpenGLObject();
 
 	public:
+		bool operator == (const OpenGLObject& oOpenGLObject)
+		{
+			if(this->m_nObjectID == oOpenGLObject.m_nObjectID)
+				return true;
+
+			return false;
+		}
+
+	public:
 		constexpr inline unsigned int GetObjectID() const;
 
 		virtual void Create() PURE;
